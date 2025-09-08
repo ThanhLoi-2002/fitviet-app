@@ -68,7 +68,7 @@ class CustomTextField extends StatefulWidget {
     this.iconSize = 18,
     this.isPhone = false,
     this.countryDialCode,
-    this.showLabelText = true,
+    this.showLabelText = false,
     this.required = false,
     this.labelText,
     this.validator,

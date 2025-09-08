@@ -11,4 +11,5 @@ class Images {
   static const String search = 'assets/images/search.png';
   static const String profile = 'assets/images/profile.png';
   static const String card = 'assets/images/card.png';
+  static const String orangeCircle = 'assets/images/orange_circle.png';
 }

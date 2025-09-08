@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_client/helper/get_di.dart';
 import 'package:fitness_client/helper/route_helper.dart';
 import 'package:fitness_client/util/app_constants.dart';
@@ -7,9 +8,13 @@ import 'package:get/get.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+    
   await GetDi.init();
+
+  // Chặn xoay ngang
   SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp, // Chỉ cho phép xoay dọc
+    DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
     runApp(MyApp());

@@ -34,10 +34,10 @@ android {
 
     signingConfigs {
         create("release") {
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-            storeFile = file("debug.keystore")
-            storePassword = "android"
+            keyAlias = "key"
+            keyPassword = "123abc"
+            storeFile = file("key.jks")
+            storePassword = "123abc"
         }
     }
 

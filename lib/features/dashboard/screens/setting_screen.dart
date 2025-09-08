@@ -57,7 +57,7 @@ class SettingScreen extends StatelessWidget {
                   buildListTile('Cách hoạt động của FitNet', Icons.fitness_center, () => {}),
                   buildListTile('Trợ giúp', Icons.help, () => {}),
                   buildListTile('Gửi phản hồi', Icons.help, () => {}),
-                  buildListTile('Đăng xuất', Icons.logout, () => {Get.offAllNamed(RouteHelper.signIn)}),
+                  buildListTile('Đăng xuất', Icons.logout, () => {Get.toNamed(RouteHelper.signIn)}),
                 ],
               ),
             ),

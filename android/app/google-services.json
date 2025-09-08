@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "27141401865",
-    "project_id": "fitness-375213",
-    "storage_bucket": "fitness-375213.appspot.com"
+    "project_number": "827252684008",
+    "project_id": "ecommerce-fullstack-61f24",
+    "storage_bucket": "ecommerce-fullstack-61f24.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:27141401865:android:a38be2178e62bf915937d8",
+        "mobilesdk_app_id": "1:827252684008:android:1d413fd78d5343d24a455d",
         "android_client_info": {
           "package_name": "com.fitnessclient"
         }
       },
       "oauth_client": [
         {
-          "client_id": "27141401865-pup49rt3jj2ceiqfuhvefhho16g57jv9.apps.googleusercontent.com",
+          "client_id": "827252684008-n6t5jdql2jtj1i160sabvh67g56mbdtd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fitnessclient",
+            "certificate_hash": "1aeab84e00eed3b26530c044544e05866dd3b196"
+          }
+        },
+        {
+          "client_id": "827252684008-5pgout2ch5179vslssi2hctl2j8i7but.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDo9ALfgmKqUcg9ozN9tD9G6cl3XBTTSLs"
+          "current_key": "AIzaSyDL08nz5DFjLeT7ly2pfLkWMl6AQU0PiyI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "27141401865-pup49rt3jj2ceiqfuhvefhho16g57jv9.apps.googleusercontent.com",
+              "client_id": "827252684008-5pgout2ch5179vslssi2hctl2j8i7but.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,35 +44,72 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:27141401865:android:c728ae0b8534c3685937d8",
+        "mobilesdk_app_id": "1:827252684008:android:b5f603e27191dc4c4a455d",
         "android_client_info": {
-          "package_name": "com.fitnet.host"
+          "package_name": "com.sixamtech.sixam_mart_user"
         }
       },
       "oauth_client": [
         {
-          "client_id": "27141401865-v34erh48ob66n2p12fjthtcl9hdvcjrd.apps.googleusercontent.com",
+          "client_id": "827252684008-3nhej2ooek9pmbq96cd0h1ipo064b5tp.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.fitnet.host",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+            "package_name": "com.sixamtech.sixam_mart_user",
+            "certificate_hash": "1aeab84e00eed3b26530c044544e05866dd3b196"
           }
         },
         {
-          "client_id": "27141401865-pup49rt3jj2ceiqfuhvefhho16g57jv9.apps.googleusercontent.com",
+          "client_id": "827252684008-5pgout2ch5179vslssi2hctl2j8i7but.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDo9ALfgmKqUcg9ozN9tD9G6cl3XBTTSLs"
+          "current_key": "AIzaSyDL08nz5DFjLeT7ly2pfLkWMl6AQU0PiyI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "27141401865-pup49rt3jj2ceiqfuhvefhho16g57jv9.apps.googleusercontent.com",
+              "client_id": "827252684008-5pgout2ch5179vslssi2hctl2j8i7but.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827252684008:android:882b0fd6155dd8a94a455d",
+        "android_client_info": {
+          "package_name": "com.sixamtech.stackfooduser"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827252684008-u7h3voojeplv5d7bhnr1d8kfpht2av4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sixamtech.stackfooduser",
+            "certificate_hash": "1aeab84e00eed3b26530c044544e05866dd3b196"
+          }
+        },
+        {
+          "client_id": "827252684008-5pgout2ch5179vslssi2hctl2j8i7but.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDL08nz5DFjLeT7ly2pfLkWMl6AQU0PiyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827252684008-5pgout2ch5179vslssi2hctl2j8i7but.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

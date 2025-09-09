@@ -1,12 +1,10 @@
-import 'package:fitness_client/features/client/models/client_model.dart';
+import 'package:fitness_client/features/profile/models/client_model.dart';
 
 class SignUpBodyModel {
   String? phone;
   String? email;
   String? password;
   String? passwordConfirm;
-  // String? refCode;
-  // String? deviceToken;
   String? name;
 
   SignUpBodyModel({this.phone, this.email, this.password, this.name, this.passwordConfirm});
@@ -15,8 +13,6 @@ class SignUpBodyModel {
     phone = json['phone'];
     email = json['email'];
     password = json['password'];
-    // refCode = json['ref_code'];
-    // deviceToken = json['cm_firebase_token'];
     name = json['name'];
   }
 

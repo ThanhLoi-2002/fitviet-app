@@ -10,4 +10,8 @@ class Pagination {
     required this.limit,
     required this.totalPages,
   });
+
+  factory Pagination.fromJson(Map<String, dynamic> json) {
+    return Pagination(total: json['total'] ?? 0, page: json['page'] ?? 1, limit: json['limit'] ?? 10, totalPages: json['totalPages'] ?? 1);
+  }
 }

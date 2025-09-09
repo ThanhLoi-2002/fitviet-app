@@ -2,11 +2,15 @@ import 'dart:convert';
 
 import 'package:fitness_client/common/widgets/custom_ink_well.dart';
 import 'package:fitness_client/common/widgets/custom_snackbar.dart';
+import 'package:fitness_client/features/auth/controllers/auth_controller.dart';
+import 'package:fitness_client/features/auth/domains/models/social_log_in_body.dart';
+import 'package:fitness_client/features/auth/enums/login_type_enum.dart';
 import 'package:fitness_client/util/dimensions.dart';
 import 'package:fitness_client/util/images.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SocialLoginWidget extends StatelessWidget {
@@ -66,28 +70,20 @@ class SocialLoginWidget extends StatelessWidget {
   }
 
   void _googleLogin(GoogleSignIn googleSignIn) async {
-    try {
-      googleSignIn.signOut();
-      GoogleSignInAccount googleAccount = (await googleSignIn.signIn())!;
-      GoogleSignInAuthentication auth = await googleAccount.authentication;
-      debugPrint(jsonEncode(auth));
-      showCustomSnackBar(jsonEncode(auth));
-    } catch (error) {
-      debugPrint(jsonEncode(error));
-    }
+    googleSignIn.signOut();
+    GoogleSignInAccount googleAccount = (await googleSignIn.signIn())!;
+    GoogleSignInAuthentication auth = await googleAccount.authentication;
+    // debugPrint('googleAccount: ${googleAccount.toString()}');
+    // debugPrint('auth.accessToken: ${auth.accessToken}');
+    // debugPrint('auth.idToken: ${auth.idToken}');
 
-    // SocialLogInBody googleBodyModel = SocialLogInBody(
-    //   email: googleAccount.email, token: auth.accessToken, uniqueId: googleAccount.id,
-    //   medium: 'google', accessToken: 1, loginType: CentralizeLoginType.social.name,
-    // );
+    SocialLogInBody googleBodyModel = SocialLogInBody(accessToken: auth.idToken, loginType: LoginType.google.value);
 
-    // Get.find<AuthController>().loginWithSocialMedia(googleBodyModel).then((response) {
-    //   if (response.isSuccess) {
-    //     _processSocialSuccessSetup(response, googleBodyModel, null, null);
-    //   } else {
-    //     showCustomSnackBar(response.message);
-    //   }
-    // });
+    Get.find<AuthController>().loginWithSocialMedia(googleBodyModel).then((response) {
+      if (!response.isSuccess) {
+        showCustomSnackBar(response.message);
+      }
+    });
   }
 
   void _facebookLogin() async {
@@ -96,21 +92,13 @@ class SocialLoginWidget extends StatelessWidget {
       Map userData = await FacebookAuth.instance.getUserData();
       debugPrint(jsonEncode(userData));
 
-      // SocialLogInBody facebookBodyModel = SocialLogInBody(
-      //   email: userData['email'],
-      //   token: result.accessToken!.token,
-      //   uniqueId: result.accessToken!.userId,
-      //   medium: 'facebook',
-      //   loginType: CentralizeLoginType.social.name,
-      // );
+      SocialLogInBody facebookBodyModel = SocialLogInBody(accessToken: result.accessToken!.tokenString, loginType: LoginType.facebook.value);
 
-      // Get.find<AuthController>().loginWithSocialMedia(facebookBodyModel).then((response) {
-      //   if (response.isSuccess) {
-      //     _processSocialSuccessSetup(response, null, null, facebookBodyModel);
-      //   } else {
-      //     showCustomSnackBar(response.message);
-      //   }
-      // });
+      Get.find<AuthController>().loginWithSocialMedia(facebookBodyModel).then((response) {
+        if (!response.isSuccess) {
+          showCustomSnackBar(response.message);
+        }
+      });
     }
   }
 }

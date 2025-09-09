@@ -1,11 +1,10 @@
 import 'package:fitness_client/common/widgets/customer_image_widget.dart';
-import 'package:fitness_client/common/widgets/search_field_widget.dart';
 import 'package:fitness_client/features/dashboard/widgets/banner_widget.dart';
+import 'package:fitness_client/helper/route_helper.dart';
 import 'package:fitness_client/util/app_constants.dart';
 import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/dimensions.dart';
 import 'package:fitness_client/util/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  final TextEditingController _searchController = TextEditingController();
   late TabController _tabController;
 
   @override
@@ -48,19 +46,21 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             spacing: 10,
             children: [
               Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Theme.of(context).disabledColor, width: 0.2),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: SearchFieldWidget(
-                    controller: _searchController,
-                    radius: 50,
-                    filledColor: Colors.grey[200],
-                    hint: 'Tìm kiếm',
-                    suffixIcon: _searchController.text.isNotEmpty ? Icons.clear : null,
-                    prefixIcon: CupertinoIcons.search,
-                    prefixIconColor: Color.fromRGBO(255, 100, 0, 1),
+                child: GestureDetector(
+                  onTap: () => { Get.toNamed(RouteHelper.search)},
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Theme.of(context).disabledColor, width: 0.5),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Icons.search, color: Colors.orange),
+                        SizedBox(width: 10),
+                        Text('Tìm kiếm', style: TextStyle(color: Colors.black54)),
+                      ],
+                    ),
                   ),
                 ),
               ),

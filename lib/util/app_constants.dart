@@ -6,10 +6,14 @@ class AppConstants {
   static const String baseUrl = 'http://10.0.2.2:3004';
   static const String imgDefault = 'https://tse3.mm.bing.net/th/id/OIP.09mzllR7Fq9-7LREOJNbggHaE7?pid=Api&P=0&h=220';
 
-  static const String categoryUri = '/api/v1/categories';
-
   static const String registerUri = '/api/auth/signUp';
+  static const String loginUri = '/api/auth/signIn';
+  static const String loginGoogleUri = '/api/auth/signInWithGoogle';
+  static const String loginFacebookUri = '/api/auth/signInWithFacebook';
+    static const String getMeUri = '/api/client/me';
 
   /// Shared Key
   static const String token = 'token';
+  static const String userPassword = 'user_password';
+  static const String userEmailOrPhone = 'user_email_or_phone';
 }

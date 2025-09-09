@@ -1,4 +1,7 @@
+import 'package:fitness_client/common/widgets/custom_button.dart';
+import 'package:fitness_client/common/widgets/custom_slider_widget.dart';
 import 'package:fitness_client/features/search/widgets/action_button_widget.dart';
+import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,28 +14,28 @@ class FilterDrawerWidget extends StatefulWidget {
 }
 
 class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
+  String? selectedLocation = '134 Tân Phú, P1, Quận...';
+  String? selectedActivity = 'Gym';
+  double rating = 4.0;
+  double price = 3000000; // Giá tiền
+  double range = 17; // Phạm vi
+  List<bool> selectedGoodReviews = [false, false, false, false, false];
+
+  // Đánh giá tốt
+  List<String> goodReviews = ['Vệ sinh tăng cường', 'Thiết bị hiện đại', 'Vị trí tốt', 'Trải nghiệm thú vị', 'Không gian tuyệt vời'];
+
+  // Tiện nghi
+  List<String> amenities = ['Wifi', 'Hồ bơi', 'Sauna', 'Máy sấy'];
+  List<bool> selectedAmenities = [false, false, false, false];
+
+  // Sở thích cá nhân
+  List<String> personalPreferences = ['Riêng tư', 'Thân thiện', 'Ánh sáng', 'Cây xanh', 'Liên kết CLB', 'Có bảo lưu'];
+  List<bool> selectedPreferences = [false, false, false, false, false, false];
+
+  // Bộ môn
+  List<String> activities = ['Yoga', 'Gym', 'Boxing', 'Crossfit'];
   @override
   Widget build(BuildContext context) {
-    String? selectedLocation = '134 Tân Phú, P1, Quận...';
-    String? selectedActivity = 'Gym';
-    double rating = 4.0;
-    double price = 3000000; // Giá tiền
-    double range = 17; // Phạm vi
-    List<bool> selectedGoodReviews = [false, false, false, false, false];
-
-    // Đánh giá tốt
-    List<String> goodReviews = ['Vệ sinh tăng cường', 'Thiết bị hiện đại', 'Vị trí tốt', 'Trải nghiệm thú vị', 'Không gian tuyệt vời'];
-
-    // Tiện nghi
-    List<String> amenities = ['Wifi', 'Hồ bơi', 'Sauna', 'Máy sấy'];
-    List<bool> selectedAmenities = [false, false, false, false];
-
-    // Sở thích cá nhân
-    List<String> personalPreferences = ['Riêng tư', 'Thân thiện', 'Ánh sáng', 'Cây xanh', 'Liên kết CLB', 'Có bảo lưu'];
-    List<bool> selectedPreferences = [false, false, false, false, false, false];
-
-    // Bộ môn
-    List<String> activities = ['Yoga', 'Gym', 'Boxing', 'Crossfit'];
     return Drawer(
       child: SingleChildScrollView(
         child: Padding(
@@ -44,7 +47,7 @@ class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
               SizedBox(height: 20),
 
               // Vị trí
-              Text('Vị trí của bạn', style: fontRegular),
+              Text('Vị trí của bạn', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
               SizedBox(height: 10),
               DropdownButtonFormField<String>(
                 value: selectedLocation,
@@ -68,30 +71,49 @@ class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
               SizedBox(height: 20),
 
               // Bộ môn
-              Text('Bộ môn', style: fontRegular),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Bộ môn', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
+                  TextButton(
+                    onPressed: () {
+                      // Hành động khi nhấn "Xem thêm"
+                    },
+                    child: Text('Xem thêm', style: fontRegular.copyWith()),
+                  ),
+                ],
+              ),
               SizedBox(height: 10),
               Wrap(
                 spacing: 8.0, // Khoảng cách giữa các chips
                 runSpacing: 8.0, // Khoảng cách giữa các dòng
                 children: List.generate((activities.length / 2).ceil(), (index) {
                   return Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       for (int i = index * 2; i < (index + 1) * 2 && i < activities.length; i++)
                         Padding(
                           padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
-                          child: SizedBox(
-                            width: context.width * 0.25,
-                            child: ChoiceChip(
-                              label: Text(activities[i]),
-                              selected: selectedActivity == activities[i],
-                              selectedColor: Colors.orange,
-                              backgroundColor: Colors.grey[200],
-                              onSelected: (selected) {
-                                setState(() {
-                                  selectedActivity = selected ? activities[i] : null;
-                                });
-                              },
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                selectedActivity = selectedActivity == activities[i] ? null : activities[i];
+                              });
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.3, // Sử dụng MediaQuery để lấy kích thước
+                              height: MediaQuery.of(context).size.height * 0.07, // Sử dụng MediaQuery để lấy kích thước
+                              alignment: Alignment.center, // Căn giữa nội dung
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: selectedActivity == activities[i] ? AppColors.orange300 : Colors.grey[200], // Màu nền thay đổi khi được chọn
+                              ),
+                              child: Text(
+                                activities[i],
+                                style: TextStyle(
+                                  color: selectedActivity == activities[i] ? Colors.white : Colors.black, // Màu chữ thay đổi khi được chọn
+                                ),
+                              ),
                             ),
                           ),
                         ),
@@ -99,128 +121,216 @@ class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
                   );
                 }),
               ),
-              SizedBox(height: 10),
-              TextButton(
-                onPressed: () {
-                  // Hành động khi nhấn "Xem thêm"
-                },
-                child: Text('Xem thêm', style: TextStyle(color: Colors.orange)),
-              ),
               SizedBox(height: 20),
 
               // Đánh giá
-              Text('Đánh giá', style: fontRegular),
+              Text('Đánh giá', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
               Column(
                 children: List.generate(5, (index) {
-                  return RadioListTile<double>(
-                    title: Text('Từ ${5 - index} sao'),
-                    value: 5 - index.toDouble(),
-                    groupValue: rating,
-                    onChanged: (double? value) {
-                      setState(() {
-                        rating = value!;
-                      });
-                    },
+                  int star = 5 - index;
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text('Từ $star sao', style: TextStyle(fontSize: 15, color: star == rating ? Colors.grey[900] : Colors.grey[700])),
+                      ),
+                      Radio<double>(
+                        activeColor: AppColors.orange300,
+                        value: 5 - index.toDouble(),
+                        groupValue: rating,
+                        onChanged: (double? value) {
+                          setState(() {
+                            rating = value!;
+                          });
+                        },
+                      ),
+                    ],
                   );
                 }),
               ),
               SizedBox(height: 20),
 
               // Giá tiền
-              Text('Giá tiền', style: fontRegular),
-              Slider(
-                value: price,
-                min: 0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Giá tiền', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text('${price.toInt()} đ', style: TextStyle(fontSize: 16)),
+                ],
+              ),
+              CustomSliderWidget(
                 max: 5000000,
-                divisions: 10,
+                min: 0,
+                price: price,
                 label: '${price.toInt()} đ',
-                onChanged: (newValue) {
+                onChanged: (double newValue) {
                   setState(() {
                     price = newValue;
                   });
                 },
               ),
-              Text('${price.toInt()} đ', style: TextStyle(fontSize: 16)),
+
               SizedBox(height: 20),
 
               // Phạm vi
-              Text('Phạm vi', style: fontRegular),
-              Slider(
-                value: range,
-                min: 0,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Phạm vi', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text('${range.toInt()} km', style: TextStyle(fontSize: 16)),
+                ],
+              ),
+              CustomSliderWidget(
                 max: 50,
-                divisions: 10,
+                min: 0,
+                price: range,
                 label: '${range.toInt()} km',
-                onChanged: (newValue) {
+                onChanged: (double newValue) {
                   setState(() {
                     range = newValue;
                   });
                 },
               ),
-              Text('${range.toInt()} km', style: TextStyle(fontSize: 16)),
+
               SizedBox(height: 20),
 
               // Được đánh giá tốt
-              Text('Được đánh giá tốt', style: fontRegular),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Được đánh giá tốt', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text('Chi tiết', style: fontRegular),
+                ],
+              ),
               Column(
                 children: List.generate(goodReviews.length, (index) {
-                  return CheckboxListTile(
-                    title: Text(goodReviews[index]),
-                    value: selectedGoodReviews[index],
-                    onChanged: (bool? value) {
-                      setState(() {
-                        selectedGoodReviews[index] = value!;
-                      });
-                    },
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(goodReviews[index], style: TextStyle(fontSize: 15, color: selectedGoodReviews[index] ? Colors.grey[900] : Colors.grey[700])),
+                      ),
+                      Checkbox(
+                        shape: const CircleBorder(),
+                        activeColor: AppColors.orange300,
+                        value: selectedGoodReviews[index],
+                        onChanged: (bool? value) {
+                          setState(() {
+                            selectedGoodReviews[index] = value!;
+                          });
+                        },
+                      ),
+                    ],
                   );
                 }),
               ),
               SizedBox(height: 20),
 
               // Tiện nghi
-              Text('Tiện nghi', style: fontRegular),
-              Wrap(
-                spacing: 8.0,
-                children: amenities.map((amenity) {
-                  int index = amenities.indexOf(amenity);
-                  return ChoiceChip(
-                    label: Text(amenity),
-                    selected: selectedAmenities[index],
-                    onSelected: (selected) {
-                      setState(() {
-                        selectedAmenities[index] = selected;
-                      });
-                    },
-                  );
-                }).toList(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Tiện nghi', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text('Xem thêm', style: fontRegular),
+                ],
               ),
+              SizedBox(height: 10),
+              Wrap(
+                              spacing: 8.0, // Khoảng cách giữa các chips
+                              runSpacing: 8.0, // Khoảng cách giữa các dòng
+                              children: List.generate((activities.length / 2).ceil(), (index) {
+                                return Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    for (int i = index * 2; i < (index + 1) * 2 && i < activities.length; i++)
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              // Toggled selection for the activity
+                                              selectedActivity = selectedActivity == activities[i] ? null : activities[i];
+                                            });
+                                          },
+                                          child: Container(
+                                            width: MediaQuery.of(context).size.width * 0.3, // Sử dụng MediaQuery để lấy kích thước
+                                            height: MediaQuery.of(context).size.height * 0.07, // Sử dụng MediaQuery để lấy kích thước
+                                            alignment: Alignment.center, // Căn giữa nội dung
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(8),
+                                              color: selectedActivity == activities[i] ? AppColors.orange300 : Colors.grey[200], // Màu nền thay đổi khi được chọn
+                                            ),
+                                            child: Text(
+                                              activities[i],
+                                              style: TextStyle(
+                                                color: selectedActivity == activities[i] ? Colors.white : Colors.black, // Màu chữ thay đổi khi được chọn
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                );
+                              }),
+                            ),
               SizedBox(height: 20),
 
               // Sở thích cá nhân
-              Text('Sở thích cá nhân', style: fontRegular),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Sở thích cá nhân', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
+                  Text('Xem thêm', style: fontRegular),
+                ],
+              ),
+              SizedBox(height: 10),
               Wrap(
-                spacing: 8.0,
-                children: personalPreferences.map((preference) {
-                  int index = personalPreferences.indexOf(preference);
-                  return ChoiceChip(
-                    label: Text(preference),
-                    selected: selectedPreferences[index],
-                    onSelected: (selected) {
-                      setState(() {
-                        selectedPreferences[index] = selected;
-                      });
-                    },
+                spacing: 8.0, // Khoảng cách giữa các chips
+                runSpacing: 8.0, // Khoảng cách giữa các dòng
+                children: List.generate((personalPreferences.length / 2).ceil(), (index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (int i = index * 2; i < (index + 1) * 2 && i < personalPreferences.length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                // Toggle selection for the preference
+                                selectedPreferences[i] = !selectedPreferences[i];
+                              });
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.3, // Sử dụng MediaQuery để lấy kích thước
+                              height: MediaQuery.of(context).size.height * 0.07, // Sử dụng MediaQuery để lấy kích thước
+                              alignment: Alignment.center, // Căn giữa nội dung
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: selectedPreferences[i] ? AppColors.orange300 : Colors.grey[200], // Màu nền thay đổi khi được chọn
+                              ),
+                              child: Text(
+                                personalPreferences[i],
+                                style: TextStyle(
+                                  color: selectedPreferences[i] ? Colors.white : Colors.black, // Màu chữ thay đổi khi được chọn
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   );
-                }).toList(),
+                }),
               ),
               SizedBox(height: 20),
 
-              ElevatedButton(
+              CustomButton(
+                color: AppColors.orange300,
+                buttonText: 'Xem kết quả',
                 onPressed: () {
                   // Xem kết quả
                   Get.back();
                 },
-                child: Text('Xem kết quả'),
               ),
             ],
           ),

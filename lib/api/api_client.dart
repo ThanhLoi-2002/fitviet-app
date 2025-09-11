@@ -163,8 +163,8 @@ class ApiClient extends GetxService {
     if (kDebugMode) {
       print('====> API Response: [${response0.statusCode}] $uri');
       if (response.statusCode != 500) {
-        print('data: ${response0.data}');
-        print('message: ${response0.message}');
+        print('response.data: ${response0.data}');
+        print('response.message: ${response0.message}');
       }
     }
     if (handleError) {

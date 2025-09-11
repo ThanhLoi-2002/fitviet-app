@@ -1,4 +1,4 @@
-import 'package:fitness_client/common/widgets/customer_image_widget.dart';
+import 'package:fitness_client/common/widgets/custom_image_widget.dart';
 import 'package:fitness_client/util/app_constants.dart';
 import 'package:fitness_client/util/dimensions.dart';
 import 'package:fitness_client/util/styles.dart';

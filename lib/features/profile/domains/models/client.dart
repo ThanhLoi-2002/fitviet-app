@@ -1,4 +1,4 @@
-class ClientModel {
+class Client {
   String? id;
   String? username;
   String? name;
@@ -20,7 +20,7 @@ class ClientModel {
   String? resetToken;
   String? gym;
 
-  ClientModel({
+  Client({
     this.id,
     this.username,
     this.name,
@@ -43,8 +43,8 @@ class ClientModel {
     this.gym,
   });
 
-  ClientModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  Client.fromJson(Map<String, dynamic> json) {
+    id = json['_id'];
     username = json['username'];
     name = json['name'];
     gender = json['gender'] != null ? ClientGender.values.firstWhere((g) => g.value == json['gender']) : null;

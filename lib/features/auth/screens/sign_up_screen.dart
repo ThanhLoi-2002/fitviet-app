@@ -3,7 +3,7 @@ import 'package:fitness_client/common/widgets/custom_button.dart';
 import 'package:fitness_client/common/widgets/custom_snackbar.dart';
 import 'package:fitness_client/common/widgets/custom_text_field.dart';
 import 'package:fitness_client/features/auth/controllers/auth_controller.dart';
-import 'package:fitness_client/features/auth/domains/models/signup_body_model.dart';
+import 'package:fitness_client/features/auth/domains/models/signup_body.dart';
 import 'package:fitness_client/helper/validate_check.dart';
 import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/app_constants.dart';
@@ -36,7 +36,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         String name = _nameController.text.trim();
         String password = _passwordController.text.trim();
         String confirmPassword = _confirmPasswordController.text.trim();
-        SignUpBodyModel signUpBody = SignUpBodyModel(email: email, name: name, password: password, phone: phone, passwordConfirm: confirmPassword);
+        SignUpBody signUpBody = SignUpBody(email: email, name: name, password: password, phone: phone, passwordConfirm: confirmPassword);
         ResponseModel response = await authController.registration(signUpBody);
         showCustomSnackBar(response.message, isError: !response.isSuccess);
         if (response.isSuccess) {

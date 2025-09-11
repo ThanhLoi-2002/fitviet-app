@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:fitness_client/common/widgets/custom_ink_well.dart';
 import 'package:fitness_client/common/widgets/custom_snackbar.dart';
 import 'package:fitness_client/features/auth/controllers/auth_controller.dart';
+import 'package:fitness_client/features/auth/domains/enums/login_type_enum.dart';
 import 'package:fitness_client/features/auth/domains/models/social_log_in_body.dart';
-import 'package:fitness_client/features/auth/enums/login_type_enum.dart';
 import 'package:fitness_client/util/dimensions.dart';
 import 'package:fitness_client/util/images.dart';
 import 'package:fitness_client/util/styles.dart';
@@ -77,7 +77,7 @@ class SocialLoginWidget extends StatelessWidget {
     // debugPrint('auth.accessToken: ${auth.accessToken}');
     // debugPrint('auth.idToken: ${auth.idToken}');
 
-    SocialLogInBody googleBodyModel = SocialLogInBody(accessToken: auth.idToken, loginType: LoginType.google.value);
+    SocialLoginBodyModel googleBodyModel = SocialLoginBodyModel(accessToken: auth.idToken, loginType: LoginType.google.value);
 
     Get.find<AuthController>().loginWithSocialMedia(googleBodyModel).then((response) {
       if (!response.isSuccess) {
@@ -92,7 +92,7 @@ class SocialLoginWidget extends StatelessWidget {
       Map userData = await FacebookAuth.instance.getUserData();
       debugPrint(jsonEncode(userData));
 
-      SocialLogInBody facebookBodyModel = SocialLogInBody(accessToken: result.accessToken!.tokenString, loginType: LoginType.facebook.value);
+      SocialLoginBodyModel facebookBodyModel = SocialLoginBodyModel(accessToken: result.accessToken!.tokenString, loginType: LoginType.facebook.value);
 
       Get.find<AuthController>().loginWithSocialMedia(facebookBodyModel).then((response) {
         if (!response.isSuccess) {

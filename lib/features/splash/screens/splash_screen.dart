@@ -1,3 +1,5 @@
+import 'package:fitness_client/features/address/controllers/address_controller.dart';
+import 'package:fitness_client/helper/auth_helper.dart';
 import 'package:fitness_client/helper/route_helper.dart';
 import 'package:fitness_client/util/app_constants.dart';
 import 'package:fitness_client/util/app_colors.dart';
@@ -21,15 +23,20 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     checkInternet();
 
+    Get.find<AddressController>().checkPermission();
+
     Future.delayed(Duration(seconds: 3), () {
-      Get.offAllNamed(RouteHelper.initial);
+      if (AuthHelper.isLoggedIn()) {
+        Get.offAllNamed(RouteHelper.initial);
+      } else {
+        Get.offAllNamed(RouteHelper.signIn);
+      }
     });
   }
 
   void checkInternet() async {
     final List<ConnectivityResult> connectivityResult = await (Connectivity().checkConnectivity());
-    bool isConnected =
-        connectivityResult.contains(ConnectivityResult.wifi) || connectivityResult.contains(ConnectivityResult.mobile);
+    bool isConnected = connectivityResult.contains(ConnectivityResult.wifi) || connectivityResult.contains(ConnectivityResult.mobile);
 
     if (!isConnected) {
       Get.offAllNamed(RouteHelper.noInternet);
@@ -40,11 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [AppColors.orange300, Color.fromRGBO(219, 83, 0, 1)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        gradient: LinearGradient(colors: [AppColors.orange300, Color.fromRGBO(219, 83, 0, 1)], begin: Alignment.topLeft, end: Alignment.bottomRight),
       ),
       child: Stack(
         children: [

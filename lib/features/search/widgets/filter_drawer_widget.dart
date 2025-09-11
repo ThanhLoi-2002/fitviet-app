@@ -1,4 +1,5 @@
 import 'package:fitness_client/common/widgets/custom_button.dart';
+import 'package:fitness_client/common/widgets/custom_dropdown_button.dart';
 import 'package:fitness_client/common/widgets/custom_slider_widget.dart';
 import 'package:fitness_client/features/search/widgets/action_button_widget.dart';
 import 'package:fitness_client/util/app_colors.dart';
@@ -14,7 +15,7 @@ class FilterDrawerWidget extends StatefulWidget {
 }
 
 class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
-  String? selectedLocation = '134 Tân Phú, P1, Quận...';
+  String selectedLocation = '134 Tân Phú, P1, Quận...';
   String? selectedActivity = 'Gym';
   double rating = 4.0;
   double price = 3000000; // Giá tiền
@@ -49,22 +50,14 @@ class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
               // Vị trí
               Text('Vị trí của bạn', style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w500)),
               SizedBox(height: 10),
-              DropdownButtonFormField<String>(
+              CustomDropdownButton(
                 value: selectedLocation,
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8.0),
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
-                ),
                 items: <String>['134 Tân Phú, P1, Quận...', 'Địa điểm 2', 'Địa điểm 3'].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(value: value, child: Text(value));
                 }).toList(),
                 onChanged: (String? newValue) {
                   setState(() {
-                    selectedLocation = newValue;
+                    selectedLocation = newValue!;
                   });
                 },
               ),
@@ -236,43 +229,43 @@ class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
               ),
               SizedBox(height: 10),
               Wrap(
-                              spacing: 8.0, // Khoảng cách giữa các chips
-                              runSpacing: 8.0, // Khoảng cách giữa các dòng
-                              children: List.generate((activities.length / 2).ceil(), (index) {
-                                return Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    for (int i = index * 2; i < (index + 1) * 2 && i < activities.length; i++)
-                                      Padding(
-                                        padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            setState(() {
-                                              // Toggled selection for the activity
-                                              selectedActivity = selectedActivity == activities[i] ? null : activities[i];
-                                            });
-                                          },
-                                          child: Container(
-                                            width: MediaQuery.of(context).size.width * 0.3, // Sử dụng MediaQuery để lấy kích thước
-                                            height: MediaQuery.of(context).size.height * 0.07, // Sử dụng MediaQuery để lấy kích thước
-                                            alignment: Alignment.center, // Căn giữa nội dung
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(8),
-                                              color: selectedActivity == activities[i] ? AppColors.orange300 : Colors.grey[200], // Màu nền thay đổi khi được chọn
-                                            ),
-                                            child: Text(
-                                              activities[i],
-                                              style: TextStyle(
-                                                color: selectedActivity == activities[i] ? Colors.white : Colors.black, // Màu chữ thay đổi khi được chọn
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                  ],
-                                );
-                              }),
+                spacing: 8.0, // Khoảng cách giữa các chips
+                runSpacing: 8.0, // Khoảng cách giữa các dòng
+                children: List.generate((activities.length / 2).ceil(), (index) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (int i = index * 2; i < (index + 1) * 2 && i < activities.length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                // Toggled selection for the activity
+                                selectedActivity = selectedActivity == activities[i] ? null : activities[i];
+                              });
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.3, // Sử dụng MediaQuery để lấy kích thước
+                              height: MediaQuery.of(context).size.height * 0.07, // Sử dụng MediaQuery để lấy kích thước
+                              alignment: Alignment.center, // Căn giữa nội dung
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: selectedActivity == activities[i] ? AppColors.orange300 : Colors.grey[200], // Màu nền thay đổi khi được chọn
+                              ),
+                              child: Text(
+                                activities[i],
+                                style: TextStyle(
+                                  color: selectedActivity == activities[i] ? Colors.white : Colors.black, // Màu chữ thay đổi khi được chọn
+                                ),
+                              ),
                             ),
+                          ),
+                        ),
+                    ],
+                  );
+                }),
+              ),
               SizedBox(height: 20),
 
               // Sở thích cá nhân

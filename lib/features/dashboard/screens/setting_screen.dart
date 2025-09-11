@@ -1,6 +1,7 @@
 import 'package:fitness_client/common/widgets/confirmation_dialog.dart';
+import 'package:fitness_client/common/widgets/custom_list_tile_widget.dart';
 import 'package:fitness_client/common/widgets/not_logged_in_screen.dart';
-import 'package:fitness_client/common/widgets/customer_image_widget.dart';
+import 'package:fitness_client/common/widgets/custom_image_widget.dart';
 import 'package:fitness_client/features/auth/controllers/auth_controller.dart';
 import 'package:fitness_client/features/profile/controllers/profile_controller.dart';
 import 'package:fitness_client/helper/auth_helper.dart';
@@ -85,13 +86,13 @@ class _SettingScreenState extends State<SettingScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: ListView(
                           children: [
-                            buildListTile('Thanh toán và chi trả', Icons.credit_card, () => {}),
-                            buildListTile('Giới thiệu bạn bè', Icons.people, () => {}),
-                            buildListTile('Trở thành đối tác của FitNet', Icons.fitness_center, () => {}),
-                            buildListTile('Cách hoạt động của FitNet', Icons.fitness_center, () => {}),
-                            buildListTile('Trợ giúp', Icons.help, () => {}),
-                            buildListTile('Gửi phản hồi', Icons.help, () => {}),
-                            buildListTile('Đăng xuất', Icons.logout, () => {logout()}),
+                            CustomListTileWidget(title: 'Thanh toán và chi trả', icon: Icons.credit_card, onTap: () => {}),
+                            CustomListTileWidget(title: 'Giới thiệu bạn bè', icon: Icons.people, onTap: () => {}),
+                            CustomListTileWidget(title: 'Trở thành đối tác của FitNet', icon: Icons.fitness_center, onTap: () => {}),
+                            CustomListTileWidget(title: 'Cách hoạt động của FitNet', icon: Icons.fitness_center, onTap: () => {}),
+                            CustomListTileWidget(title: 'Trợ giúp', icon: Icons.help, onTap: () => {}),
+                            CustomListTileWidget(title: 'Gửi phản hồi', icon: Icons.help, onTap: () => {}),
+                            CustomListTileWidget(title: 'Đăng xuất', icon: Icons.logout, onTap: () => {logout()}),
                           ],
                         ),
                       ),
@@ -101,11 +102,6 @@ class _SettingScreenState extends State<SettingScreen> {
               );
             },
           );
-  }
-
-  Widget buildListTile(String title, IconData? icon, Function() onTap) {
-    bool isLogout = title == 'Đăng xuất';
-    return ListTile(leading: Icon(icon, size: 24), title: Text(title), trailing: !isLogout ? Icon(Icons.arrow_forward_ios, size: 16) : null, onTap: onTap);
   }
 
   void logout() {

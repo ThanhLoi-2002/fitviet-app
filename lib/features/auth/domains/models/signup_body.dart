@@ -1,15 +1,15 @@
-import 'package:fitness_client/features/profile/models/client_model.dart';
+import 'package:fitness_client/features/profile/domains/models/client.dart';
 
-class SignUpBodyModel {
+class SignUpBody {
   String? phone;
   String? email;
   String? password;
   String? passwordConfirm;
   String? name;
 
-  SignUpBodyModel({this.phone, this.email, this.password, this.name, this.passwordConfirm});
+  SignUpBody({this.phone, this.email, this.password, this.name, this.passwordConfirm});
 
-  SignUpBodyModel.fromJson(Map<String, dynamic> json) {
+  SignUpBody.fromJson(Map<String, dynamic> json) {
     phone = json['phone'];
     email = json['email'];
     password = json['password'];
@@ -23,7 +23,7 @@ class SignUpBodyModel {
       'password': password,
       'passwordConfirm': passwordConfirm,
       'clientName': name,
-      'dateOfBirth': DateTime(1970,1,1).millisecondsSinceEpoch,
+      'dateOfBirth': DateTime(1970, 1, 1).millisecondsSinceEpoch,
       'gender': ClientGender.other.value,
     };
   }

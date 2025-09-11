@@ -1,6 +1,6 @@
 import 'package:fitness_client/common/models/response_model.dart';
-import 'package:fitness_client/features/auth/domains/models/login_body_model.dart';
-import 'package:fitness_client/features/auth/domains/models/signup_body_model.dart';
+import 'package:fitness_client/features/auth/domains/models/login_body.dart';
+import 'package:fitness_client/features/auth/domains/models/signup_body.dart';
 import 'package:fitness_client/features/auth/domains/models/social_log_in_body.dart';
 import 'package:fitness_client/features/auth/domains/services/auth_service.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -21,7 +21,7 @@ class AuthController extends GetxController implements GetxService {
     return await authService.clearSharedData();
   }
 
-  Future<ResponseModel> registration(SignUpBodyModel signUpBody) async {
+  Future<ResponseModel> registration(SignUpBody signUpBody) async {
     _isLoading = true;
     update();
     ResponseModel responseModel = await authService.registration(signUpBody);
@@ -30,19 +30,19 @@ class AuthController extends GetxController implements GetxService {
     return responseModel;
   }
 
-  Future<ResponseModel> login(LoginBodyModel loginBodyModel) async {
+  Future<ResponseModel> login(LoginBody loginBody) async {
     _isLoading = true;
     update();
-    ResponseModel responseModel = await authService.login(loginBodyModel);
+    ResponseModel responseModel = await authService.login(loginBody);
     _isLoading = false;
     update();
     return responseModel;
   }
 
-  Future<ResponseModel> loginWithSocialMedia(SocialLogInBody socialLogInBody) async {
+  Future<ResponseModel> loginWithSocialMedia(SocialLoginBodyModel socialLoginBodyModel) async {
     _isLoading = true;
     update();
-    ResponseModel responseModel = await authService.loginWithSocialMedia(socialLogInBody);
+    ResponseModel responseModel = await authService.loginWithSocialMedia(socialLoginBodyModel);
     // _getUserAndCartData(responseModel);
     _isLoading = false;
     update();
@@ -62,8 +62,8 @@ class AuthController extends GetxController implements GetxService {
     return authService.clearUserAccount();
   }
 
-  String getUserEmailOrPhone() {
-    return authService.getUserEmailOrPhone();
+  String getUserPhone() {
+    return authService.getUserPhone();
   }
 
   String getUserPassword() {

@@ -1,8 +1,8 @@
 import 'package:fitness_client/api/api_client.dart';
 import 'package:fitness_client/common/models/response_model.dart';
-import 'package:fitness_client/features/auth/domains/models/login_body_model.dart';
-import 'package:fitness_client/features/auth/domains/models/login_response_model.dart';
-import 'package:fitness_client/features/auth/domains/models/signup_body_model.dart';
+import 'package:fitness_client/features/auth/domains/models/login_body.dart';
+import 'package:fitness_client/features/auth/domains/models/login_response.dart';
+import 'package:fitness_client/features/auth/domains/models/signup_body.dart';
 import 'package:fitness_client/features/auth/domains/models/social_log_in_body.dart';
 import 'package:fitness_client/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,20 +18,20 @@ class AuthService {
     return true;
   }
 
-  Future<ResponseModel> registration(SignUpBodyModel signUpBody) async {
+  Future<ResponseModel> registration(SignUpBody signUpBody) async {
     return await apiClient.postData(AppConstants.registerUri, signUpBody.toJson());
   }
 
-  Future<ResponseModel> login(LoginBodyModel loginBodyModel) async {
-    ResponseModel response = await apiClient.postData(AppConstants.loginUri, loginBodyModel.toJson());
+  Future<ResponseModel> login(LoginBody loginBody) async {
+    ResponseModel response = await apiClient.postData(AppConstants.loginUri, loginBody.toJson());
     if (response.isSuccess) {
-      response.data = LoginResponseModel.fromJson(response.data);
+      response.data = LoginResponse.fromJson(response.data);
       saveUserToken(response.data.accessToken);
     }
     return response;
   }
 
-  Future<ResponseModel> loginWithSocialMedia(SocialLogInBody socialLogInModel) async {
+  Future<ResponseModel> loginWithSocialMedia(SocialLoginBodyModel socialLogInModel) async {
     ResponseModel response;
     if (socialLogInModel.loginType == 'google') {
       response = await apiClient.postData(AppConstants.loginGoogleUri, socialLogInModel.toJson());
@@ -40,7 +40,7 @@ class AuthService {
     }
 
     if (response.isSuccess) {
-      response.data = LoginResponseModel.fromJson(response.data);
+      response.data = LoginResponse.fromJson(response.data);
       saveUserToken(response.data.accessToken);
     }
     return response;
@@ -59,7 +59,7 @@ class AuthService {
   Future<void> saveUserAccount(String number, String password) async {
     try {
       await sharedPreferences.setString(AppConstants.userPassword, password);
-      await sharedPreferences.setString(AppConstants.userEmailOrPhone, number);
+      await sharedPreferences.setString(AppConstants.userPhone, number);
     } catch (e) {
       rethrow;
     }
@@ -67,7 +67,7 @@ class AuthService {
 
   Future<bool> clearUserAccount() async {
     await sharedPreferences.remove(AppConstants.userPassword);
-    return await sharedPreferences.remove(AppConstants.userEmailOrPhone);
+    return await sharedPreferences.remove(AppConstants.userPhone);
   }
 
   String getUserToken() {
@@ -77,8 +77,8 @@ class AuthService {
     return token;
   }
 
-  String getUserEmailOrPhone() {
-    return sharedPreferences.getString(AppConstants.userEmailOrPhone) ?? "";
+  String getUserPhone() {
+    return sharedPreferences.getString(AppConstants.userPhone) ?? "";
   }
 
   String getUserPassword() {

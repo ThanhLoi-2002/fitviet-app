@@ -1,8 +1,8 @@
-class SocialLogInBody {
+class SocialLoginBodyModel {
   String? accessToken;
   String? loginType;
 
-  SocialLogInBody({this.accessToken, this.loginType});
+  SocialLoginBodyModel({this.accessToken, this.loginType});
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};

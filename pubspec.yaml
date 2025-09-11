@@ -50,6 +50,8 @@ dependencies:
   flutter_facebook_auth: ^7.1.2
   google_sign_in: ^6.2.1
   phone_numbers_parser: ^9.0.11
+  carousel_slider: ^5.1.1
+  geolocator: ^14.0.2
 
 dev_dependencies:
   flutter_test:

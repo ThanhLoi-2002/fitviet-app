@@ -3,7 +3,7 @@ import 'package:fitness_client/common/widgets/custom_button.dart';
 import 'package:fitness_client/common/widgets/custom_snackbar.dart';
 import 'package:fitness_client/common/widgets/custom_text_field.dart';
 import 'package:fitness_client/features/auth/controllers/auth_controller.dart';
-import 'package:fitness_client/features/auth/domains/models/login_body_model.dart';
+import 'package:fitness_client/features/auth/domains/models/login_body.dart';
 import 'package:fitness_client/features/auth/widgets/social_login_widget.dart';
 import 'package:fitness_client/helper/validate_check.dart';
 import 'package:fitness_client/util/app_colors.dart';
@@ -24,7 +24,7 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailOrPhoneController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -32,7 +32,7 @@ class _SignInScreenState extends State<SignInScreen> {
     super.initState();
     AuthController authController = Get.find<AuthController>();
 
-    _emailOrPhoneController.text = authController.getUserEmailOrPhone();
+    _phoneController.text = authController.getUserPhone();
     _passwordController.text = authController.getUserPassword();
     if (authController.getUserPassword() != "") {
       authController.toggleRememberMe();
@@ -49,17 +49,17 @@ class _SignInScreenState extends State<SignInScreen> {
               padding: EdgeInsets.only(top: Dimensions.paddingSizeLarge),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.arrow_back),
-                        onPressed: () {
-                          Get.offAllNamed(RouteHelper.initial);
-                        },
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: [
+                  //     IconButton(
+                  //       icon: Icon(Icons.arrow_back),
+                  //       onPressed: () {
+                  //         Get.offAllNamed(RouteHelper.initial);
+                  //       },
+                  //     ),
+                  //   ],
+                  // ),
                   Padding(
                     padding: EdgeInsets.all(Dimensions.paddingSizeExtraOverLarge),
                     child: Form(
@@ -78,14 +78,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           // Tiêu đề
                           Text('Welcome to ${AppConstants.appName.toUpperCase()}', style: fontBold.copyWith(fontSize: Dimensions.fontSizeOverLarge)),
                           SizedBox(height: 40),
-                          // Trường nhập số điện thoại hoặc email
+                          // Trường nhập số điện thoại
                           CustomTextField(
-                            hintText: 'Số điện thoại hoặc Email',
-                            controller: _emailOrPhoneController,
+                            hintText: 'Số điện thoại',
+                            controller: _phoneController,
                             inputType: TextInputType.text,
                             prefixIcon: Icons.people,
                             required: true,
-                            validator: (value) => ValidateCheck.validateEmptyText(value: value, name: 'số điện thoại hoặc email'),
+                            validator: (value) => ValidateCheck.validateEmptyText(value: value, name: 'số điện thoại'),
                           ),
                           SizedBox(height: 16),
                           // Trường nhập mật khẩu
@@ -153,14 +153,14 @@ class _SignInScreenState extends State<SignInScreen> {
   void submitForm(AuthController authController) async {
     if (_formKey.currentState!.validate()) {
       // Xử lý đăng ký ở đây
-      String emailOrPhone = _emailOrPhoneController.text.trim();
+      String phone = _phoneController.text.trim();
       String password = _passwordController.text.trim();
-      LoginBodyModel loginBodyModel = LoginBodyModel(emailOrPhone: emailOrPhone, password: password);
-      ResponseModel response = await authController.login(loginBodyModel);
+      LoginBody loginBody = LoginBody(phone: phone, password: password);
+      ResponseModel response = await authController.login(loginBody);
       showCustomSnackBar(response.message, isError: !response.isSuccess);
       if (response.isSuccess) {
         if (authController.isActiveRememberMe) {
-          authController.saveUserAccount(emailOrPhone, password);
+          authController.saveUserAccount(phone, password);
         } else {
           authController.clearUserAccount();
         }

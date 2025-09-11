@@ -10,10 +10,14 @@ class AppConstants {
   static const String loginUri = '/api/auth/signIn';
   static const String loginGoogleUri = '/api/auth/signInWithGoogle';
   static const String loginFacebookUri = '/api/auth/signInWithFacebook';
-    static const String getMeUri = '/api/client/me';
+  static const String getMeUri = '/api/client/me';
+  static const String getAllBannerUri = '/api/banner/all';
+    static const String getAllGymUri = '/api/gym/all';
 
   /// Shared Key
   static const String token = 'token';
   static const String userPassword = 'user_password';
-  static const String userEmailOrPhone = 'user_email_or_phone';
+  static const String userPhone = 'user__phone';
+  static const String userLongitude = 'user_longitude';
+  static const String userLatitude = 'user_latitude';
 }

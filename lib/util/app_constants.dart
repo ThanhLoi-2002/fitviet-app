@@ -12,7 +12,8 @@ class AppConstants {
   static const String loginFacebookUri = '/api/auth/signInWithFacebook';
   static const String getMeUri = '/api/client/me';
   static const String getAllBannerUri = '/api/banner/all';
-    static const String getAllGymUri = '/api/gym/all';
+  static const String getAllGymUri = '/api/gym/all';
+  static const String getGymByIdUri = '/api/gym';
 
   /// Shared Key
   static const String token = 'token';

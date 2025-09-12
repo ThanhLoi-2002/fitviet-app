@@ -17,8 +17,8 @@ class Gym {
   OpeningTime? openingTime;
   List<String>? images;
   List<String>? location;
-  String? long;
-  String? lat;
+  double? long;
+  double? lat;
   bool? isLiked;
   bool? isApproved;
   double? rating;
@@ -74,20 +74,20 @@ class Gym {
   factory Gym.fromJson(Map<String, dynamic> json) {
     return Gym(
       id: json['_id'],
-      name: json['name'],
-      slug: json['slug'],
-      code: json['code'],
+      name: json['name'] ?? "",
+      slug: json['slug'] ?? "",
+      code: json['code'] ?? "",
       cheapestPackage: json['cheapestPackage'] != null ? Package.fromJson(json['cheapestPackage']) : null,
-      rawName: json['rawName'],
-      description: json['description'],
-      address: json['address'],
+      rawName: json['rawName'] ?? "",
+      description: json['description'] ?? "",
+      address: json['address'] ?? "",
       segment: json['segment'] != null ? GymSegment.values.firstWhere((e) => e.value == json['segment']) : null,
       openingTime: json['openingTime'] != null ? OpeningTime.fromJson(json['openingTime']) : null,
       images: List<String>.from(json['images'] ?? []),
       location: List<String>.from(json['location'] ?? []),
-      long: json['long'],
-      lat: json['lat'],
-      isLiked: json['isLiked'],
+      long: json['long']?.toDouble() ?? 0,
+      lat: json['lat']?.toDouble() ?? 0,
+      isLiked: json['isLiked'] ?? false,
       isApproved: json['isApproved'],
       rating: json['rating']?.toDouble(),
       totalRatingPoint: json['totalRatingPoint']?.toDouble(),

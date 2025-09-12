@@ -12,6 +12,9 @@ class GymController extends GetxController implements GetxService {
   List<Gym>? _gyms;
   List<Gym>? get gyms => _gyms;
 
+  Gym? _gym;
+  Gym? get gym => _gym;
+
   GymFilter gymFilter = GymFilter();
   // int currentPage = 1;
   int totalPage = 0;
@@ -25,6 +28,16 @@ class GymController extends GetxController implements GetxService {
         _gyms!.addAll(result.data!.data!);
       }
     }
+
+    update();
+  }
+
+  Future<void> getGymById(String id) async {
+    _gym = await gymService.getGymById(id);
+    update();
+  }
+
+  Future<void> tabChanged(String value) async {
     
     update();
   }

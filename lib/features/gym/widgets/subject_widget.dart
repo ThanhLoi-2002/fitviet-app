@@ -1,10 +1,11 @@
+import 'package:fitness_client/common/widgets/custom_image_widget.dart';
+import 'package:fitness_client/features/subject/domains/models/subject.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
 
 class SubjectWidget extends StatelessWidget {
-  const SubjectWidget({super.key, required this.label, required this.icon, required this.onTap});
-  final String label;
-  final IconData icon;
+  const SubjectWidget({super.key, required this.subject, required this.onTap});
+  final Subject subject;
   final Function() onTap;
 
   @override
@@ -23,8 +24,8 @@ class SubjectWidget extends StatelessWidget {
         child: Column(
           spacing: 10,
           children: [
-            Icon(icon),
-            Text(label, style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w400)),
+            CustomImageWidget(imageUrl: subject.logo!, width: 24, height: 24),
+            Text(subject.name!, style: fontRegular.copyWith(fontSize: 16, fontWeight: FontWeight.w400)),
           ],
         ),
       ),

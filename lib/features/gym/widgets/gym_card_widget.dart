@@ -11,6 +11,7 @@ class GymCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String image = gym.images!.isNotEmpty ? gym.images![0] : '';
     return Container(
       width: context.width * 0.4, // Điều chỉnh kích thước
       height: 160, // Sử dụng MediaQuery để lấy kích thước
@@ -18,7 +19,7 @@ class GymCardWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomImageWidget(borderRadius: Dimensions.fontSizeOverSmall, imageUrl: gym.images![0], fit: BoxFit.cover, height: 100, width: double.infinity),
+          CustomImageWidget(borderRadius: Dimensions.fontSizeOverSmall, imageUrl: image, fit: BoxFit.cover, height: 100, width: double.infinity),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

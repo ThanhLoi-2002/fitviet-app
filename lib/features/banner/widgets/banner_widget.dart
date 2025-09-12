@@ -1,7 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fitness_client/common/widgets/custom_image_widget.dart';
+import 'package:fitness_client/common/widgets/custom_carousel_widget.dart';
 import 'package:fitness_client/features/banner/controllers/banner_controller.dart';
-import 'package:fitness_client/util/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,28 +16,10 @@ class _BannerWidgetState extends State<BannerWidget> {
   Widget build(BuildContext context) {
     return GetBuilder<BannerController>(
       builder: (bannerController) {
+      List<String> images = bannerController.banners.map((b) => b.logo!).toList();
         return bannerController.banners.isEmpty
             ? SizedBox()
-            : CarouselSlider.builder(
-                options: CarouselOptions(
-                  height: 137,
-                  autoPlay: false,
-                  enlargeCenterPage: false,
-                  aspectRatio: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      currentIndex = index; // Cập nhật chỉ số ảnh hiện tại
-                    });
-                  },
-                ),
-                itemCount: bannerController.banners.length,
-                itemBuilder: (BuildContext context, int index, int realIndex) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(Dimensions.radiusDefault),
-                    child: CustomImageWidget(width: double.infinity, height: 137, imageUrl: bannerController.banners[index].logo!, fit: BoxFit.fill),
-                  );
-                },
-              );
+            : CustomCarouselWidget(height: 137, images: images);
       },
     );
   }

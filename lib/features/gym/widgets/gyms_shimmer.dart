@@ -13,6 +13,7 @@ class _GymsShimmerState extends State<GymsShimmer> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 10,
       children: List.generate((4 / 2).ceil(), (index) {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,

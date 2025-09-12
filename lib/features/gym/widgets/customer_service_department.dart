@@ -1,4 +1,5 @@
 import 'package:fitness_client/common/widgets/avatar_header_widget.dart';
+import 'package:fitness_client/common/widgets/divider_widget.dart';
 import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,8 @@ class CustomerServiceDepartmentWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        DividerWidget(),
+        SizedBox(height: 20),
         AvatarHeaderWidget(
           imageUrl: '',
           textTop: Text('Bộ phận CSKH', style: fontRegular.copyWith(fontSize: 20, fontWeight: FontWeight.w400)),

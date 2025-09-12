@@ -13,8 +13,8 @@ class Rating {
   factory Rating.fromJson(Map<String, dynamic> json) {
     return Rating(
       id: json['_id'],
-      content: json['content'],
-      rating: json['rating'],
+      content: json['content'] ?? "",
+      rating: json['rating']?.toDouble(),
       client: json['client'] != null ? Client.fromJson(json['client']) : null,
       gym: json['gym'] != null ? Gym.fromJson(json['gym']) : null,
       createdAt: DateTime.parse(json['createdAt']),

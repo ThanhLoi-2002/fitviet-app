@@ -1,6 +1,7 @@
 import 'package:fitness_client/features/dashboard/screens/favorite_screen.dart';
 import 'package:fitness_client/features/dashboard/screens/home_screen.dart';
 import 'package:fitness_client/features/dashboard/screens/inbox_screen.dart';
+import 'package:fitness_client/features/dashboard/screens/my_card_screen.dart';
 import 'package:fitness_client/features/dashboard/screens/setting_screen.dart';
 import 'package:fitness_client/features/dashboard/widgets/bottom_nav_item_widget.dart';
 import 'package:fitness_client/util/images.dart';
@@ -33,7 +34,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   static final List<Widget> _pages = <Widget>[
     HomeScreen(),
     const FavoriteScreen(),
-    const _NavPlaceholder(title: 'Thẻ của tôi'),
+    const MyCardScreen(),
     const InboxScreen(),
     const SettingScreen(),
   ];
@@ -64,20 +65,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
       _pageController.jumpToPage(pageIndex);
       _currentIndex = pageIndex;
     });
-  }
-}
-
-class _NavPlaceholder extends StatelessWidget {
-  const _NavPlaceholder({required this.title});
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: Center(
-        child: Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
-      ),
-    );
   }
 }

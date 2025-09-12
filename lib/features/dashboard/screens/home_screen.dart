@@ -110,21 +110,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                       spacing: 5,
                       children: List.generate((gymController.gyms!.length / 2).ceil(), (index) {
                         return Container(
-                          padding: EdgeInsets.only(left: context.width * 0.03),
+                          padding: EdgeInsets.only(left: gymController.gyms!.length % 2 == 0 ? 0 : context.width * 0.03),
                           child: Row(
                             spacing: 5,
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: gymController.gyms!.length % 2 == 0 ? MainAxisAlignment.center : MainAxisAlignment.start,
                             children: [
-                              for (int i = index * 2; i < (index + 1) * 2 && i < gymController.gyms!.length; i++)
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed(RouteHelper.getGymDetailRoute(gymController.gyms![i].id!));
-                                    },
-                                    child: GymCardWidget(gym: gymController.gyms![i]),
-                                  ),
-                                ),
                               for (int i = index * 2; i < (index + 1) * 2 && i < gymController.gyms!.length; i++)
                                 Padding(
                                   padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải

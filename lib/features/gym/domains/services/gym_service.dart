@@ -26,4 +26,14 @@ class GymService {
     }
     return null;
   }
+
+  Future<Gym?> getGymById(String id) async {
+    String uri = '${AppConstants.getGymByIdUri}/$id';
+
+    ResponseModel response = await apiClient.getData(uri);
+    if (response.isSuccess) {
+      return Gym.fromJson(response.data);
+    }
+    return null;
+  }
 }

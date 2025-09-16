@@ -9,11 +9,11 @@ class AddressController extends GetxController implements GetxService {
     await addressService.checkPermission();
   }
 
-  String getLongitude() {
+  double getLongitude() {
     return addressService.getLongitude();
   }
 
-  String getLatitude() {
+  double getLatitude() {
     return addressService.getLatitude();
   }
 }

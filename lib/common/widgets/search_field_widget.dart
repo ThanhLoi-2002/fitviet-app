@@ -66,7 +66,7 @@ class _SearchFieldWidgetState extends State<SearchFieldWidget> {
             : null,
       ),
       onSubmitted: widget.onSubmit as void Function(String)?,
-      onChanged: widget.onChanged as void Function(String)?,
+      onChanged: widget.onChanged as void Function(String?)?,
     );
   }
 }

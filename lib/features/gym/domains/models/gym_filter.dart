@@ -5,14 +5,16 @@ class GymFilter {
   int? page;
   double? long;
   double? lat;
-  String? subjects;
-  String? basicConvenience;
-  String? highClassConvenience;
-  double? rating;
-  double? fromPrice;
-  double? toPrice;
-  double? fromDistance;
-  double? toDistance;
+  List<String> subjects;
+  List<String> basicConvenience;
+  List<String> highClassConvenience;
+  List<String> favoriteConvenience;
+  List<String> safeConvenience;
+  double rating;
+  double fromPrice;
+  double toPrice;
+  double fromDistance;
+  double toDistance;
   String? search;
 
   // Constructor
@@ -20,17 +22,19 @@ class GymFilter {
     this.limit = 10,
     this.sortBy,
     this.sortDirection,
-    this.page = 1,
+    this.page = 0,
     this.long,
     this.lat,
-    this.subjects,
-    this.basicConvenience,
-    this.highClassConvenience,
-    this.rating,
-    this.fromPrice,
-    this.toPrice,
-    this.fromDistance,
-    this.toDistance,
+    required this.subjects,
+    required this.basicConvenience,
+    required this.highClassConvenience,
+    required this.favoriteConvenience,
+    required this.safeConvenience,
+    required this.rating,
+    required this.fromPrice,
+    required this.toPrice,
+    required this.fromDistance,
+    required this.toDistance,
     this.search,
   });
 
@@ -43,14 +47,16 @@ class GymFilter {
       'page': page,
       'long': long,
       'lat': lat,
-      'subjects': subjects,
-      'basicConvenience': basicConvenience,
-      'highClassConvenience': highClassConvenience,
+      'subjects': subjects.join(','),
+      'basicConvenience': basicConvenience.join(','),
+      'highClassConvenience': highClassConvenience.join(','),
+      'safeConvenience': safeConvenience.join(','),
+      'favoriteConvenience': favoriteConvenience.join(','),
       'rating': rating,
       'fromPrice': fromPrice,
       'toPrice': toPrice,
-      'fromDistance': fromDistance,
-      'toDistance': toDistance,
+      'fromDistance': fromDistance * 1000,
+      'toDistance': toDistance * 1000,
       'search': search,
     };
   }

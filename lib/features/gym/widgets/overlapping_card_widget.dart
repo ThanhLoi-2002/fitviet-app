@@ -43,13 +43,12 @@ class _OverlappingCardWidgetState extends State<OverlappingCardWidget> {
               spacing: 8,
               children: List.generate((widget.gym.subjects!.length).ceil(), (index) {
                 return SubjectWidget(subject: widget.gym.subjects![index], onTap: () {});
-              }
-            ),
+              }),
             ),
           ),
           const SizedBox(height: 12),
         ],
-        Text('Mở cửa ${widget.gym.openingTime?.from} - ${widget.gym.openingTime?.to}', style: fontMedium.copyWith(fontSize: 16, fontWeight: FontWeight.w300)),
+        Text('Mở cửa ${widget.gym.openingTime?.from?.toInt()}h - ${widget.gym.openingTime?.to?.toInt()}h', style: fontMedium.copyWith(fontSize: 16, fontWeight: FontWeight.w300)),
         const SizedBox(height: 12),
         // CustomDropdownButton(
         //   value: dropdownValue,

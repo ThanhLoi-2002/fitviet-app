@@ -8,7 +8,6 @@ class ResponseModel<T> {
   PaginationResponse? metadata;
   ResponseModel({this.isSuccess = false, this.message, this.data, this.metadata, this.statusCode = 0});
 
-  //Áp dụng khi không có pagination hoặc pagination được trả bằng metadata
   factory ResponseModel.fromJson(Map<String, dynamic> json) {
     // Xử lý message có thể là chuỗi hoặc mảng
     String? message;
@@ -27,7 +26,7 @@ class ResponseModel<T> {
     );
   }
 
-  // Áp dụng khi pagegination trả lồng vào response.data
+//Áp dụng khi response.data có trả kèm pagegination
   factory ResponseModel.fromJson1(Map<String, dynamic> json, T Function(Map<String, dynamic>) fromJsonT) {
     // Xử lý message có thể là chuỗi hoặc mảng
     String? message;

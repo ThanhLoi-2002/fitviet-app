@@ -17,11 +17,25 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
+  final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, initialIndex: 0, vsync: this);
+    // Lắng nghe sự thay đổi của tab
+    _tabController.addListener(() {
+      // Khi tab thay đổi
+      int index = _tabController.index; // Lấy index của tab hiện tại
+      Get.find<GymController>().tabChanged(index);
+    });
+
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent) {
+        Get.find<GymController>().getAll();
+      }
+    });
+
     Get.find<BannerController>().getAllBanner();
     Get.find<GymController>().getAll();
   }
@@ -37,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     return GetBuilder<GymController>(
       builder: (gymController) {
         return SingleChildScrollView(
+          controller: _scrollController,
           padding: EdgeInsets.fromLTRB(
             context.width * 0.05, // padding trái
             context.height * 0.05, // padding trên
@@ -104,31 +119,32 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               ),
 
               gymController.gyms == null ? GymsShimmer() : SizedBox(),
+              gymController.gyms != null && gymController.gyms!.isEmpty ? Center(child: Text('Không có phòng gym nào')) : SizedBox(),
 
               gymController.gyms != null && gymController.gyms!.isNotEmpty
-                  ? Column(
-                      spacing: 5,
-                      children: List.generate((gymController.gyms!.length / 2).ceil(), (index) {
-                        return Container(
-                          padding: EdgeInsets.only(left: gymController.gyms!.length % 2 == 0 ? 0 : context.width * 0.03),
-                          child: Row(
-                            spacing: 5,
-                            mainAxisAlignment: gymController.gyms!.length % 2 == 0 ? MainAxisAlignment.center : MainAxisAlignment.start,
-                            children: [
-                              for (int i = index * 2; i < (index + 1) * 2 && i < gymController.gyms!.length; i++)
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 8.0), // Khoảng cách bên phải
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      Get.toNamed(RouteHelper.getGymDetailRoute(gymController.gyms![i].id!));
-                                    },
-                                    child: GymCardWidget(gym: gymController.gyms![i]),
-                                  ),
-                                ),
-                            ],
-                          ),
-                        );
-                      }),
+                  ? GridView.builder(
+                      physics: NeverScrollableScrollPhysics(), // Disable scrolling
+                      shrinkWrap: true, // Allow the grid to take only the necessary space
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of columns
+                        childAspectRatio: 1, // Adjust the aspect ratio as needed
+                        crossAxisSpacing: 4.0, // Space between columns
+                        mainAxisSpacing: 5.0, // Space between rows
+                      ),
+        
+                      itemCount: gymController.gyms!.length + (gymController.isLoading ? 1 : 0), // Thêm 1 để hiển thị loader
+                      itemBuilder: (context, index) {
+                        if (index < gymController.gyms!.length) {
+                          return GestureDetector(
+                            onTap: () {
+                              Get.toNamed(RouteHelper.getGymDetailRoute(gymController.gyms![index].id!));
+                            },
+                            child: GymCardWidget(gym: gymController.gyms![index]),
+                          );
+                        } else {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                      },
                     )
                   : SizedBox(),
 

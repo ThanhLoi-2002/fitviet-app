@@ -1,5 +1,6 @@
 import 'package:fitness_client/common/widgets/custom_image_widget.dart';
 import 'package:fitness_client/features/gym/domains/models/gym.dart';
+import 'package:fitness_client/helper/price_converter.dart';
 import 'package:fitness_client/util/dimensions.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class GymCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String image = gym.images!.isNotEmpty ? gym.images![0] : '';
     return Container(
-      width: context.width * 0.4, // Điều chỉnh kích thước
-      height: 160, // Sử dụng MediaQuery để lấy kích thước
+      width: context.width * 0.45, // Điều chỉnh kích thước
+      height: 160,
       alignment: Alignment.center, // Căn giữa nội dung
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,10 +37,10 @@ class GymCardWidget extends StatelessWidget {
                     Text(gym.rating.toString(), style: TextStyle(color: Colors.black)),
                   ],
                 ),
-                if (gym.cheapestPackage != null)
+                if (gym.cheapestPackage != null && gym.cheapestPackage!.price != null)
                   Row(
                     children: [
-                      Text(gym.cheapestPackage!.price.toString(), style: fontMedium),
+                      Text(PriceConverter.formatCurrency(gym.cheapestPackage!.price!), style: fontMedium),
                       Text('/tháng', style: TextStyle(color: Colors.grey)),
                     ],
                   ),

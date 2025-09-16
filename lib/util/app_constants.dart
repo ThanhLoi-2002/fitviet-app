@@ -14,6 +14,8 @@ class AppConstants {
   static const String getAllBannerUri = '/api/banner/all';
   static const String getAllGymUri = '/api/gym/all';
   static const String getGymByIdUri = '/api/gym';
+  static const String getAllConvenienceUri = '/api/convenience/client';
+    static const String getAllSubjectUri = '/api/subject';
 
   /// Shared Key
   static const String token = 'token';

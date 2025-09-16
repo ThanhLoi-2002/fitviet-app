@@ -16,7 +16,7 @@ class Gym {
   GymSegment? segment;
   OpeningTime? openingTime;
   List<String>? images;
-  List<String>? location;
+  List<double>? location;
   double? long;
   double? lat;
   bool? isLiked;
@@ -84,7 +84,7 @@ class Gym {
       segment: json['segment'] != null ? GymSegment.values.firstWhere((e) => e.value == json['segment']) : null,
       openingTime: json['openingTime'] != null ? OpeningTime.fromJson(json['openingTime']) : null,
       images: List<String>.from(json['images'] ?? []),
-      location: List<String>.from(json['location'] ?? []),
+      location: List<double>.from(json['location'] ?? []),
       long: json['long']?.toDouble() ?? 0,
       lat: json['lat']?.toDouble() ?? 0,
       isLiked: json['isLiked'] ?? false,
@@ -151,7 +151,7 @@ class OpeningTime {
   OpeningTime({this.from, this.to});
 
   factory OpeningTime.fromJson(Map<String, dynamic> json) {
-    return OpeningTime(from: json['from'], to: json['to']);
+    return OpeningTime(from: json['from']?.toDouble(), to: json['to']?.toDouble());
   }
 
   Map<String, dynamic> toJson() {

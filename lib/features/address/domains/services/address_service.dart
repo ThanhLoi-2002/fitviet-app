@@ -28,11 +28,19 @@ class AddressService {
     }
   }
 
-  String getLongitude() {
-    return sharedPreferences.getString(AppConstants.userLongitude) ?? "";
+  double getLongitude() {
+    String? long = sharedPreferences.getString(AppConstants.userLongitude);
+    if (long != null) {
+      return double.parse(long);
+    }
+    return 0;
   }
 
-  String getLatitude() {
-    return sharedPreferences.getString(AppConstants.userLongitude) ?? "";
+  double getLatitude() {
+    String? lat = sharedPreferences.getString(AppConstants.userLatitude);
+    if (lat != null) {
+      return double.parse(lat);
+    }
+    return 0;
   }
 }

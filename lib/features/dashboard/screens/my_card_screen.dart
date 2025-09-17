@@ -1,5 +1,6 @@
 import 'package:fitness_client/common/widgets/custom_button.dart';
 import 'package:fitness_client/features/dashboard/widgets/card_drawer_widget.dart';
+import 'package:fitness_client/helper/route_helper.dart';
 import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
@@ -97,7 +98,9 @@ class _MyCardScreenState extends State<MyCardScreen> with TickerProviderStateMix
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(RouteHelper.package);
+                    },
                     radius: 8,
                     height: 48,
                     isBold: false,
@@ -126,7 +129,7 @@ class _MyCardScreenState extends State<MyCardScreen> with TickerProviderStateMix
                 controller: _tabController,
                 isScrollable: false,
                 tabs: [
-                  Tab( icon: Icon(Icons.grid_on_rounded),),
+                  Tab(icon: Icon(Icons.grid_on_rounded)),
                   Tab(icon: Icon(Icons.contacts)),
                 ],
                 labelColor: Color.fromRGBO(48, 48, 48, 1), // Màu chữ khi được chọn
@@ -136,16 +139,15 @@ class _MyCardScreenState extends State<MyCardScreen> with TickerProviderStateMix
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: Colors.transparent,
                 tabAlignment: TabAlignment.fill,
-                
               ),
-                            SizedBox(height: 16),
+              SizedBox(height: 16),
               // Tiêu đề lớp học
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Lớp hôm nay', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
-                  Icon(Icons.calendar_today, size: 24, color: AppColors.orange300)
+                  Icon(Icons.calendar_today, size: 24, color: AppColors.orange300),
                 ],
               ),
               SizedBox(height: 16),

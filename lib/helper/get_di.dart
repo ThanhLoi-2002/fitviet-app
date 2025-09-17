@@ -9,6 +9,8 @@ import 'package:fitness_client/features/convenience/controllers/convenience_cont
 import 'package:fitness_client/features/convenience/domains/services/convenience_service.dart';
 import 'package:fitness_client/features/gym/controllers/gym_controller.dart';
 import 'package:fitness_client/features/gym/domains/services/gym_service.dart';
+import 'package:fitness_client/features/package/controllers/package_controller.dart';
+import 'package:fitness_client/features/package/domains/services/package_service.dart';
 import 'package:fitness_client/features/profile/controllers/profile_controller.dart';
 import 'package:fitness_client/features/profile/services/profile_service.dart';
 import 'package:fitness_client/features/rating/controllers/rating_controller.dart';
@@ -51,6 +53,9 @@ class GetDi {
     SubjectService subjectService = SubjectService(apiClient: Get.find(), sharedPreferences: Get.find());
     Get.lazyPut(() => subjectService);
 
+    PackageService packageService = PackageService(apiClient: Get.find(), sharedPreferences: Get.find());
+    Get.lazyPut(() => packageService);
+
     /// Controller
     Get.lazyPut(() => AuthController(authService: Get.find()));
     Get.lazyPut(() => ProfileController(profileService: Get.find()));
@@ -60,5 +65,6 @@ class GetDi {
     Get.lazyPut(() => GymController(gymService: Get.find(), addressService: Get.find()));
     Get.lazyPut(() => ConvenienceController(convenienceService: Get.find()));
     Get.lazyPut(() => SubjectController(subjectService: Get.find()));
+    Get.lazyPut(() => PackageController(packageService: Get.find()));
   }
 }

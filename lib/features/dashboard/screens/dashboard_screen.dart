@@ -51,9 +51,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           destinations: <BottomNavItemWidget>[
             BottomNavItemWidget(icon: Images.search, isSelected: _currentIndex == 0, onTap: () => _setPage(0)),
             // BottomNavItemWidget(icon: Images.favorite, isSelected: _currentIndex == 1, onTap: () => _setPage(1)),
-            BottomNavItemWidget(icon: Images.card, isSelected: _currentIndex == 2, onTap: () => _setPage(1)),
+            BottomNavItemWidget(icon: Images.card, isSelected: _currentIndex == 1, onTap: () => _setPage(1)),
             // BottomNavItemWidget(icon: Images.chat, isSelected: _currentIndex == 3, onTap: () => _setPage(3)),
-            BottomNavItemWidget(icon: Images.profile, isSelected: _currentIndex == 4, onTap: () => _setPage(2)),
+            BottomNavItemWidget(icon: Images.profile, isSelected: _currentIndex == 2, onTap: () => _setPage(2)),
           ],
         ),
       ),

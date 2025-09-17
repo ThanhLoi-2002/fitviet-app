@@ -3,6 +3,7 @@ import 'package:fitness_client/features/auth/screens/sign_in_screen.dart';
 import 'package:fitness_client/features/auth/screens/sign_up_screen.dart';
 import 'package:fitness_client/features/dashboard/screens/dashboard_screen.dart';
 import 'package:fitness_client/features/gym/screens/gym_detail_screen.dart';
+import 'package:fitness_client/features/rating/screens/rating_screen.dart';
 import 'package:fitness_client/features/search/screens/search_screen.dart';
 import 'package:fitness_client/features/splash/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +17,10 @@ class RouteHelper {
   static const String search = '/search';
   static const String noInternet = '/no-internet';
   static const String gymDetail = '/gym-detail';
+    static const String rating = '/rating';
 
   static String getGymDetailRoute(String gymId) => '$gymDetail?id=$gymId';
+  static String getRatingRoute(String gymId) => '$rating?gymId=$gymId';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => getRoute(DashboardScreen(pageIndex: 0))),
@@ -30,6 +33,10 @@ class RouteHelper {
       name: gymDetail,
       page: () => getRoute(GymDetailScreen(gymId: Get.parameters['id']!)),
     ),
+    GetPage(
+      name: rating,
+      page: () => getRoute(RatingScreen(gymId: Get.parameters['gymId']!)),
+    )
   ];
 
   static Widget getRoute(Widget navigateTo, {bool byPuss = false}) {

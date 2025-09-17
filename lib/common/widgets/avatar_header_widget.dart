@@ -6,7 +6,7 @@ class AvatarHeaderWidget extends StatelessWidget {
   final String imageUrl;
   final double? avatarSize;
   final Text textTop;
-  final Text textBottom;
+  final Widget textBottom;
   final double? textSpacing;
 
   @override

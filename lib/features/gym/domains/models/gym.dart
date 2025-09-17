@@ -23,7 +23,7 @@ class Gym {
   bool? isApproved;
   double? rating;
   double? totalRatingPoint;
-  double? ratingCount;
+  int? ratingCount;
   List<Subject>? subjects;
   Merchant? merchant;
   List<Convenience>? basicConvenience; // Cập nhật đây
@@ -91,7 +91,7 @@ class Gym {
       isApproved: json['isApproved'],
       rating: json['rating']?.toDouble(),
       totalRatingPoint: json['totalRatingPoint']?.toDouble(),
-      ratingCount: json['ratingCount']?.toDouble(),
+      ratingCount: json['ratingCount']?.toInt(),
       subjects: json['subjects'] != null ? List<Subject>.from(json['subjects'].map((x) => Subject.fromJson(x))) : [],
       merchant: json['merchant'] != null ? Merchant.fromJson(json['merchant']) : null,
       basicConvenience: json['basicConvenience'] != null ? List<Convenience>.from(json['basicConvenience'].map((x) => Convenience.fromJson(x))) : [], // Cập nhật đây

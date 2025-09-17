@@ -15,7 +15,6 @@ class RatingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? 220,
-      height: height ?? 160,
       padding: const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
@@ -23,16 +22,26 @@ class RatingWidget extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 4,
         children: [
           AvatarHeaderWidget(
             imageUrl: rating.client!.avatar!,
             textTop: Text(rating.client!.name!, style: fontMedium, maxLines: 1, overflow: TextOverflow.ellipsis),
-            textBottom: Text(DateConverter.formatDate(rating.createdAt!), style: fontRegular.copyWith(color: Colors.grey)),
+            textBottom: Text(DateConverter.timeAgo(rating.createdAt!), style: fontRegular.copyWith(color: Colors.grey)),
+            
             avatarSize: 50,
             textSpacing: 4,
           ),
-          SizedBox(height: 8),
-          Text(rating.content!, maxLines: maxLines ?? 3, overflow: TextOverflow.ellipsis),
+          Row(
+            children: List.generate(5, (index) {
+              return Icon(
+                index < rating.rating! ? Icons.star : Icons.star_border,
+                color: Colors.orange, // Màu của sao
+                size: 16, // Kích thước sao
+              );
+            }),
+          ),
+          Text(rating.content!, maxLines: maxLines ?? 2, overflow: TextOverflow.ellipsis),
         ],
       ),
     );

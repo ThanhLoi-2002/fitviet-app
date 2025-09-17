@@ -16,7 +16,7 @@ class Rating {
       content: json['content'] ?? "",
       rating: json['rating']?.toDouble(),
       client: json['client'] != null ? Client.fromJson(json['client']) : null,
-      gym: json['gym'] != null ? Gym.fromJson(json['gym']) : null,
+      gym: (json['gym'] != null && json['gym'] is Map<String, dynamic>) ? Gym.fromJson(json['gym']) : null,
       createdAt: DateTime.parse(json['createdAt']),
     );
   }

@@ -21,7 +21,7 @@ class _GymAppBarWidgetState extends State<GymAppBarWidget> {
       leading: IconCircleButton(icon: Icons.arrow_back_ios_rounded, onTap: () => Get.back()),
       actions: [
         IconCircleButton(icon: Icons.share_outlined, onTap: () {}),
-        IconCircleButton(icon: Icons.favorite_border, onTap: () {}),
+        // IconCircleButton(icon: Icons.favorite_border, onTap: () {}),
       ],
       flexibleSpace: FlexibleSpaceBar(background: CustomCarouselWidget(images: widget.images)),
     );

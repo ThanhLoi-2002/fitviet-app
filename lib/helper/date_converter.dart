@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class DateConverter {
-
   static String formatDate(DateTime dateTime) {
     return DateFormat('dd-MM-yyyy hh:mm:ss a').format(dateTime);
   }
@@ -30,10 +29,10 @@ class DateConverter {
 
   static String dateTimeStringToDateTime(String dateTime) {
     DateTime d;
-    try{
+    try {
       d = DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateTime);
-    } catch(_) {
-     d = isoStringToLocalDate(dateTime);
+    } catch (_) {
+      d = isoStringToLocalDate(dateTime);
     }
     return DateFormat('dd MMM yyyy,  ${_timeFormatter()}').format(d);
   }
@@ -98,21 +97,42 @@ class DateConverter {
     return DateFormat('HH:mm').format(time);
   }
 
+  static String timeAgo(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+
+    if (difference.inDays > 365) {
+      final years = (difference.inDays / 365).floor();
+      return '$years năm trước';
+    } else if (difference.inDays > 30) {
+      final months = (difference.inDays / 30).floor();
+      return '$months tháng trước';
+    } else if (difference.inDays > 0) {
+      return '${difference.inDays} ngày trước';
+    } else if (difference.inHours > 0) {
+      return '${difference.inHours} giờ trước';
+    } else if (difference.inMinutes > 0) {
+      return '${difference.inMinutes} phút trước';
+    } else {
+      return '${difference.inSeconds} giây trước';
+    }
+  }
+
   static bool isAvailable(String? start, String? end, {DateTime? time}) {
     DateTime currentTime;
-    if(time != null) {
+    if (time != null) {
       currentTime = time;
-    }else {
+    } else {
       currentTime = Get.find<SplashController>().currentTime;
     }
     DateTime start0 = start != null ? DateFormat('HH:mm').parse(start) : DateTime(currentTime.year);
     DateTime end0 = end != null ? DateFormat('HH:mm').parse(end) : DateTime(currentTime.year, currentTime.month, currentTime.day, 23, 59, 59);
     DateTime startTime = DateTime(currentTime.year, currentTime.month, currentTime.day, start0.hour, start0.minute, start0.second);
     DateTime endTime = DateTime(currentTime.year, currentTime.month, currentTime.day, end0.hour, end0.minute, end0.second);
-    if(endTime.isBefore(startTime)) {
-      if(currentTime.isBefore(startTime) && currentTime.isBefore(endTime)){
+    if (endTime.isBefore(startTime)) {
+      if (currentTime.isBefore(startTime) && currentTime.isBefore(endTime)) {
         startTime = startTime.add(const Duration(days: -1));
-      }else {
+      } else {
         endTime = endTime.add(const Duration(days: 1));
       }
     }
@@ -127,23 +147,23 @@ class DateConverter {
     int firstValue = minMinute;
     int secondValue = maxMinute;
     String type = 'min';
-    if(minMinute >= 525600) {
+    if (minMinute >= 525600) {
       firstValue = (minMinute / 525600).floor();
       secondValue = (maxMinute / 525600).floor();
       type = 'year';
-    }else if(minMinute >= 43200) {
+    } else if (minMinute >= 43200) {
       firstValue = (minMinute / 43200).floor();
       secondValue = (maxMinute / 43200).floor();
       type = 'month';
-    }else if(minMinute >= 10080) {
+    } else if (minMinute >= 10080) {
       firstValue = (minMinute / 10080).floor();
       secondValue = (maxMinute / 10080).floor();
       type = 'week';
-    }else if(minMinute >= 1440) {
+    } else if (minMinute >= 1440) {
       firstValue = (minMinute / 1440).floor();
       secondValue = (maxMinute / 1440).floor();
       type = 'day';
-    }else if(minMinute >= 60) {
+    } else if (minMinute >= 60) {
       firstValue = (minMinute / 60).floor();
       secondValue = (maxMinute / 60).floor();
       type = 'hour';
@@ -156,7 +176,7 @@ class DateConverter {
   }
 
   static bool isBeforeTime(String? dateTime) {
-    if(dateTime == null) {
+    if (dateTime == null) {
       return false;
     }
     DateTime scheduleTime = dateTimeStringToDate(dateTime);
@@ -166,18 +186,18 @@ class DateConverter {
   static int differenceInMinute(String? deliveryTime, String? orderTime, int? processingTime, String? scheduleAt) {
     // 'min', 'hours', 'days'
     int minTime = processingTime ?? 0;
-    if(deliveryTime != null && deliveryTime.isNotEmpty && processingTime == null) {
+    if (deliveryTime != null && deliveryTime.isNotEmpty && processingTime == null) {
       try {
         List<String> timeList = deliveryTime.split('-'); // ['15', '20']
         minTime = int.parse(timeList[0]);
-      }catch(_) {}
+      } catch (_) {}
     }
     DateTime deliveryTime0 = dateTimeStringToDate(scheduleAt ?? orderTime!).add(Duration(minutes: minTime));
     return deliveryTime0.difference(DateTime.now()).inMinutes;
   }
 
   static String containTAndZToUTCFormat(String time) {
-    var newTime = '${time.substring(0,10)} ${time.substring(11,23)}';
+    var newTime = '${time.substring(0, 10)} ${time.substring(11, 23)}';
     return DateFormat('dd MMM, yyyy').format(DateFormat('yyyy-MM-dd HH:mm:ss').parse(newTime));
   }
 
@@ -198,9 +218,7 @@ class DateConverter {
     final now = DateTime.now();
     final createdAtDate = DateTime.parse(createdAt).toLocal();
 
-    if (createdAtDate.year == now.year &&
-        createdAtDate.month == now.month &&
-        createdAtDate.day == now.day) {
+    if (createdAtDate.year == now.year && createdAtDate.month == now.month && createdAtDate.day == now.day) {
       return DateFormat('h:mm a').format(createdAtDate);
     } else {
       return DateConverter.localDateToIsoStringAMPM(createdAtDate);
@@ -220,7 +238,11 @@ class DateConverter {
   }
 
   static bool isSameDate(DateTime pickedTime) {
-    return pickedTime.year == DateTime.now().year && pickedTime.month == DateTime.now().month && pickedTime.day == DateTime.now().day && pickedTime.hour == DateTime.now().hour && pickedTime.minute == DateTime.now().minute;
+    return pickedTime.year == DateTime.now().year &&
+        pickedTime.month == DateTime.now().month &&
+        pickedTime.day == DateTime.now().day &&
+        pickedTime.hour == DateTime.now().hour &&
+        pickedTime.minute == DateTime.now().minute;
   }
 
   static bool isAfterCurrentDateTime(DateTime pickedTime) {
@@ -254,5 +276,4 @@ class DateConverter {
 
     return formatter.format(createdDate);
   }
-
 }

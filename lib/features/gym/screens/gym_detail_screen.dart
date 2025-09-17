@@ -78,14 +78,14 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                       child: Row(
                         spacing: 20,
                         children: [
-                          InkWell(
-                            onTap: () {},
-                            child: Container(
-                              padding: EdgeInsets.all(12),
-                              decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.orange300),
-                              child: Icon(Icons.message_outlined, color: Colors.white),
-                            ),
-                          ),
+                          // InkWell(
+                          //   onTap: () {},
+                          //   child: Container(
+                          //     padding: EdgeInsets.all(12),
+                          //     decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.orange300),
+                          //     child: Icon(Icons.message_outlined, color: Colors.white),
+                          //   ),
+                          // ),
                           Expanded(
                             child: CustomButton(onPressed: () {}, buttonText: 'Đặt ngay', color: AppColors.orange300),
                           ),

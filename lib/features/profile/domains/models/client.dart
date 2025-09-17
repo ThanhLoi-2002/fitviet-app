@@ -57,7 +57,7 @@ class Client {
     phone = json['phone'];
     latestCodeTime = json['latestCodeTime'];
     emailVerified = json['emailVerified'];
-    avatar = json['avatar'];
+    avatar = json['avatar'] ?? "";
     status = json['status'] != null ? ClientStatus.values.firstWhere((s) => s.value == json['status']) : null;
     role = json['role'] != null ? Role.values.firstWhere((r) => r.value == json['role']) : null;
     voucher = json['voucher'] ?? [];

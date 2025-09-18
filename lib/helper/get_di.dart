@@ -12,7 +12,7 @@ import 'package:fitness_client/features/gym/domains/services/gym_service.dart';
 import 'package:fitness_client/features/package/controllers/package_controller.dart';
 import 'package:fitness_client/features/package/domains/services/package_service.dart';
 import 'package:fitness_client/features/profile/controllers/profile_controller.dart';
-import 'package:fitness_client/features/profile/services/profile_service.dart';
+import 'package:fitness_client/features/profile/domains/services/profile_service.dart';
 import 'package:fitness_client/features/rating/controllers/rating_controller.dart';
 import 'package:fitness_client/features/rating/domains/services/rating_service.dart';
 import 'package:fitness_client/features/subject/controllers/subject_controller.dart';
@@ -29,6 +29,9 @@ class GetDi {
     Get.lazyPut(() => ApiClient(appBaseUrl: AppConstants.baseUrl, sharedPreferences: Get.find()));
 
     /// Service
+    AddressService addressService = AddressService(apiClient: Get.find(), sharedPreferences: Get.find());
+    Get.lazyPut(() => addressService);
+
     AuthService authService = AuthService(apiClient: Get.find(), sharedPreferences: Get.find());
     Get.lazyPut(() => authService);
 
@@ -40,9 +43,6 @@ class GetDi {
 
     RatingService ratingService = RatingService(apiClient: Get.find(), sharedPreferences: Get.find());
     Get.lazyPut(() => ratingService);
-
-    AddressService addressService = AddressService(apiClient: Get.find(), sharedPreferences: Get.find());
-    Get.lazyPut(() => addressService);
 
     ProfileService profileService = ProfileService(apiClient: Get.find(), sharedPreferences: Get.find());
     Get.lazyPut(() => profileService);
@@ -62,9 +62,9 @@ class GetDi {
     Get.lazyPut(() => RatingController(ratingService: Get.find()));
     Get.lazyPut(() => AddressController(addressService: Get.find()));
     Get.lazyPut(() => BannerController(bannerService: Get.find()));
-    Get.lazyPut(() => GymController(gymService: Get.find(), addressService: Get.find()));
     Get.lazyPut(() => ConvenienceController(convenienceService: Get.find()));
     Get.lazyPut(() => SubjectController(subjectService: Get.find()));
     Get.lazyPut(() => PackageController(packageService: Get.find()));
+    Get.lazyPut(() => GymController(gymService: Get.find()));
   }
 }

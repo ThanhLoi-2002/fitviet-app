@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class ApiChecker {
   static void checkApi(ResponseModel response, {bool getXSnackBar = false}) {
     if (response.statusCode == 401) {
+      showCustomSnackBar(response.message, getXSnackBar: getXSnackBar);
       Get.find<AuthController>().clearSharedData().then((value) {
         Get.offAllNamed(RouteHelper.signIn);
       });

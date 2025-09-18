@@ -4,7 +4,6 @@ import 'package:fitness_client/common/widgets/custom_snackbar.dart';
 import 'package:fitness_client/common/widgets/custom_text_field.dart';
 import 'package:fitness_client/features/auth/controllers/auth_controller.dart';
 import 'package:fitness_client/features/auth/domains/models/login_body.dart';
-import 'package:fitness_client/features/auth/widgets/social_login_widget.dart';
 import 'package:fitness_client/helper/validate_check.dart';
 import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/app_constants.dart';
@@ -115,7 +114,7 @@ class _SignInScreenState extends State<SignInScreen> {
                             children: [
                               TextButton(
                                 onPressed: () {
-                                  // Hành động quên mật khẩu
+                                  Get.toNamed(RouteHelper.getChangePasswordRoute(false, ""));
                                 },
                                 child: Text('Quên mật khẩu?', style: fontRegular.copyWith(color: AppColors.orange300)),
                               ),
@@ -123,18 +122,18 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           SizedBox(height: 20),
                           // Khu vực đăng nhập bằng mạng xã hội
-                          SocialLoginWidget(),
-                          SizedBox(height: 20),
+                          // SocialLoginWidget(),
+                          // SizedBox(height: 20),
                           // Liên kết đăng ký
                           Row(
                             spacing: 5,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Chưa có tài khoản?'),
-                              InkWell(
-                                onTap: () => {Get.toNamed(RouteHelper.signUp)},
-                                child: Text('Đăng kí ngay', style: fontRegular.copyWith(color: AppColors.orange300)),
-                              ),
+                              Text('Chưa có tài khoản? Hãy liên hệ Admin'),
+                              // InkWell(
+                              //   onTap: () => {Get.toNamed(RouteHelper.signUp)},
+                              //   child: Text('Hãy liên hệ admin', style: fontRegular.copyWith(color: AppColors.orange300)),
+                              // ),
                             ],
                           ),
                         ],

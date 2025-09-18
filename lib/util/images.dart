@@ -12,4 +12,5 @@ class Images {
   static const String profile = 'assets/images/profile.png';
   static const String card = 'assets/images/card.png';
   static const String orangeCircle = 'assets/images/orange_circle.png';
+  static const String placeholder = 'assets/images/placeholder.jpg';
 }

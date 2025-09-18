@@ -5,6 +5,8 @@ import 'package:fitness_client/features/dashboard/screens/dashboard_screen.dart'
 import 'package:fitness_client/features/gym/screens/gym_detail_screen.dart';
 import 'package:fitness_client/features/package/screens/package_screen.dart';
 import 'package:fitness_client/features/payment/screens/payment_success_screen.dart';
+import 'package:fitness_client/features/profile/screens/change_password_screen.dart';
+import 'package:fitness_client/features/profile/screens/update_profile_screen.dart';
 import 'package:fitness_client/features/rating/screens/rating_screen.dart';
 import 'package:fitness_client/features/search/screens/search_screen.dart';
 import 'package:fitness_client/features/splash/screens/splash_screen.dart';
@@ -25,9 +27,12 @@ class RouteHelper {
   static const String package = '/package';
   static const String payment = '/payment';
   static const String paymentSuccess = '/payment-success';
+  static const String updateProfile = '/update-profile';
+  static const String changePassword = '/change-password';
 
   static String getGymDetailRoute(String gymId) => '$gymDetail?id=$gymId';
   static String getRatingRoute(String gymId) => '$rating?gymId=$gymId';
+  static String getChangePasswordRoute(bool fromPasswordChange, String? email) => '$changePassword?email=$email&fromPasswordChange=$fromPasswordChange';
 
   static List<GetPage> routes = [
     GetPage(name: initial, page: () => getRoute(DashboardScreen(pageIndex: 0))),
@@ -39,6 +44,11 @@ class RouteHelper {
     GetPage(name: package, page: () => getRoute(PackageScreen())),
     GetPage(name: payment, page: () => getRoute(PaymentScreen())),
     GetPage(name: paymentSuccess, page: () => getRoute(PaymentSuccessScreen())),
+    GetPage(name: updateProfile, page: () => getRoute(UpdateProfileScreen())),
+    GetPage(
+      name: changePassword,
+      page: () => getRoute(ChangePasswordScreen(fromPasswordChange: Get.parameters['fromPasswordChange'] == 'true', email: Get.parameters['email'])),
+    ),
     GetPage(
       name: gymDetail,
       page: () => getRoute(GymDetailScreen(gymId: Get.parameters['id']!)),

@@ -45,16 +45,16 @@ class Client {
 
   Client.fromJson(Map<String, dynamic> json) {
     id = json['_id'];
-    username = json['username'];
-    name = json['name'];
+    username = json['username'] ?? "";
+    name = json['name'] ?? "";
     gender = json['gender'] != null ? ClientGender.values.firstWhere((g) => g.value == json['gender']) : null;
     userCode = json['userCode'];
     dateOfBirth = json['dateOfBirth'] != null ? DateTime.parse(json['dateOfBirth']) : null;
-    rawName = json['rawName'];
-    email = json['email'];
+    rawName = json['rawName'] ?? "";
+    email = json['email'] ?? "";
     weight = json['weight']?.toDouble();
     height = json['height']?.toDouble();
-    phone = json['phone'];
+    phone = json['phone'] ?? "";
     latestCodeTime = json['latestCodeTime'];
     emailVerified = json['emailVerified'];
     avatar = json['avatar'] ?? "";

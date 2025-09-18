@@ -21,6 +21,9 @@ class AppConstants {
   static const String updateRatingUri = '/api/ratingDetail/update';
   static const String getRatingDetailUri = '/api/ratingDetail/check-rated';
   static const String getAllPackageUri = '/api/package';
+  static const String updateProfileUri = '/api/client/updateMyProfile';
+  static const String resetPasswordUri = '/api/client/reset-password';
+    static const String forgotPasswordUri = '/api/client/forgot-password';
 
   /// Shared Key
   static const String token = 'token';

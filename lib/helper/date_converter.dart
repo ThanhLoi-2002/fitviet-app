@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 class DateConverter {
+  static String formatOnlyDate(DateTime dateTime) {
+    return DateFormat('dd-MM-yyyy').format(dateTime);
+  }
+
   static String formatDate(DateTime dateTime) {
     return DateFormat('dd-MM-yyyy hh:mm:ss a').format(dateTime);
   }

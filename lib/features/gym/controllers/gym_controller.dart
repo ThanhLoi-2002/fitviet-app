@@ -1,5 +1,6 @@
 import 'package:fitness_client/common/models/list_pagination_response.dart';
 import 'package:fitness_client/common/models/response_model.dart';
+import 'package:fitness_client/features/address/controllers/address_controller.dart';
 import 'package:fitness_client/features/address/domains/services/address_service.dart';
 import 'package:fitness_client/features/gym/domains/models/gym.dart';
 import 'package:fitness_client/features/gym/domains/models/gym_filter.dart';
@@ -8,8 +9,7 @@ import 'package:get/get.dart';
 
 class GymController extends GetxController implements GetxService {
   final GymService gymService;
-  final AddressService addressService;
-  GymController({required this.gymService, required this.addressService});
+  GymController({required this.gymService});
 
   List<Gym>? _gyms;
   List<Gym>? get gyms => _gyms;
@@ -59,8 +59,8 @@ class GymController extends GetxController implements GetxService {
     resetFilter();
     if (index == 1) {
       // tìm theo gần vị trí
-      _gymFilter.long = addressService.getLongitude();
-      _gymFilter.lat = addressService.getLatitude();
+      _gymFilter.long = Get.find<AddressController>().getLongitude();
+      _gymFilter.lat = Get.find<AddressController>().getLatitude();
     }
 
     getAll();
@@ -115,8 +115,8 @@ class GymController extends GetxController implements GetxService {
 
     if (toDistance != null) {
       _gymFilter.toDistance = toDistance;
-      _gymFilter.long = addressService.getLongitude();
-      _gymFilter.lat = addressService.getLatitude();
+      _gymFilter.long = Get.find<AddressController>().getLongitude();
+      _gymFilter.lat = Get.find<AddressController>().getLatitude();
     }
 
     if (isOutOfItem != null) {

@@ -5,7 +5,9 @@ import 'package:fitness_client/features/gym/controllers/gym_controller.dart';
 import 'package:fitness_client/features/search/widgets/action_button_widget.dart';
 import 'package:fitness_client/features/search/widgets/basic_convenience_section_widget.dart';
 import 'package:fitness_client/features/search/widgets/favorite_section_convenience.dart';
+import 'package:fitness_client/features/search/widgets/high_class_section_convenience_widget.dart';
 import 'package:fitness_client/features/search/widgets/rating_section.dart';
+import 'package:fitness_client/features/search/widgets/safe_convenience_section_widget.dart';
 import 'package:fitness_client/features/search/widgets/subject_section_widget.dart';
 import 'package:fitness_client/features/subject/controllers/subject_controller.dart';
 import 'package:fitness_client/helper/price_converter.dart';
@@ -162,6 +164,16 @@ class _FilterDrawerWidgetState extends State<FilterDrawerWidget> {
                           FavoriteSectionConvenience(convenienceController: convenienceController, gymController: gymController, maxDisplay: maxDisplay),
 
                           SizedBox(height: 20),
+                          //An ninh
+                          SafeSectionConvenienceWidget(convenienceController: convenienceController, gymController: gymController, maxDisplay: maxDisplay),
+
+                          SizedBox(height: 20),
+
+                          // Cao cấp
+                          HighClassSectionConvenienceWidget(convenienceController: convenienceController, gymController: gymController, maxDisplay: maxDisplay),
+
+                          SizedBox(height: 20),
+                          
                           CustomButton(
                             color: AppColors.orange300,
                             buttonText: 'Xem kết quả',

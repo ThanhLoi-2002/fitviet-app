@@ -2,6 +2,7 @@ import 'package:fitness_client/common/widgets/custom_button.dart';
 import 'package:fitness_client/common/widgets/custom_image_widget.dart';
 import 'package:fitness_client/common/widgets/divider_widget.dart';
 import 'package:fitness_client/common/widgets/rating_bar.dart';
+import 'package:fitness_client/features/package/domains/models/package.dart';
 import 'package:fitness_client/features/package/widgets/package_item_widget.dart';
 import 'package:fitness_client/helper/price_converter.dart';
 import 'package:fitness_client/helper/route_helper.dart';
@@ -59,7 +60,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               SizedBox(height: 10),
               DividerWidget(),
               SizedBox(height: 10),
-              PackageItemWidget(isSelected: false, onTap: () {}),
+              PackageItemWidget(isSelected: false, onTap: () {}, package: Package(),),
               SizedBox(height: 10),
               DividerWidget(),
               SizedBox(height: 10),

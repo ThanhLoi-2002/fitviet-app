@@ -9,7 +9,7 @@ class PriceConverter {
       symbol: symbol, // Không hiển thị ký hiệu tiền tệ nếu để trống
       decimalDigits: 0, // Không hiển thị phần thập phân
     );
-    return formatter.format(price);
+    return '${formatter.format(price)}VND';
   }
   
   static String convertPrice(double? price, {double? discount, String? discountType, bool forDM = false, String? formatedStringPrice}) {
@@ -22,9 +22,9 @@ class PriceConverter {
     }
 
     if (price! > 100000) {
-      return '${intl.NumberFormat.compact().format(price)} VND';
+      return '${intl.NumberFormat.compact().format(price)}VND';
     }
-    return '${formatedStringPrice ?? toFixed(price)} VND';
+    return '${formatedStringPrice ?? toFixed(price)}VND';
   }
 
   static double? convertWithDiscount(double? price, double? discount, String? discountType) {

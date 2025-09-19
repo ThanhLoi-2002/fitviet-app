@@ -1,14 +1,16 @@
 import 'package:fitness_client/common/widgets/custom_image_widget.dart';
+import 'package:fitness_client/features/package/domains/models/package.dart';
+import 'package:fitness_client/features/package/widgets/price_widget.dart';
 import 'package:fitness_client/util/app_colors.dart';
-import 'package:fitness_client/util/app_constants.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
 
 class PackageItemWidget extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
+  final Package package;
 
-  const PackageItemWidget({super.key, required this.isSelected, required this.onTap});
+  const PackageItemWidget({super.key, required this.isSelected, required this.onTap, required this.package});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class PackageItemWidget extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 12.0),
         child: Row(
           children: [
-            CustomImageWidget(imageUrl: AppConstants.imgDefault, width: 90, height: 100),
+            CustomImageWidget(imageUrl: package.images!.isNotEmpty ? package.images![0] : "", width: 90, height: 100),
             Expanded(
               child: Container(
                 height: 100,
@@ -35,8 +37,8 @@ class PackageItemWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Gói tập 14 ngày', style: fontRegular.copyWith(color: Colors.grey[700], fontSize: 16)),
-                          Text('800000', style: fontMedium.copyWith(fontSize: 20)),
+                          Text(package.name!, style: fontRegular.copyWith(color: Colors.grey[700], fontSize: 16)),
+                          PriceWidget(originalPrice: package.price!, promotionalPrice: package.promotionalPrice!),
                         ],
                       ),
                     ),

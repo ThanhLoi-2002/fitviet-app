@@ -27,6 +27,7 @@ class _MapAndRatingWidgetState extends State<MapAndRatingWidget> {
 
   @override
   Widget build(BuildContext context) {
+    List<double> location = [widget.gym.location![0], widget.gym.location![1]];
     return GetBuilder<RatingController>(
       builder: (ratingController) {
         return Column(
@@ -45,7 +46,7 @@ class _MapAndRatingWidgetState extends State<MapAndRatingWidget> {
                 markers: {
                   Marker(
                     markerId: MarkerId('location'),
-                    position: LatLng(widget.gym.lat!, widget.gym.long!), // Tọa độ của vị trí
+                    position: LatLng(location[1], location[0]), // Tọa độ của vị trí
                     infoWindow: InfoWindow(
                       title: 'Địa chỉ của bạn',
                       snippet: widget.gym.address, // Địa chỉ hiển thị

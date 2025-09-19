@@ -21,9 +21,6 @@ class _SettingScreenState extends State<SettingScreen> {
   @override
   void initState() {
     super.initState();
-    if (AuthHelper.isLoggedIn()) {
-      Get.find<ProfileController>().getMyInfo();
-    }
   }
 
   @override

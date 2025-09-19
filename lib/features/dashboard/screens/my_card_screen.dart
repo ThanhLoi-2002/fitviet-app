@@ -1,7 +1,10 @@
 import 'package:fitness_client/common/widgets/custom_button.dart';
+import 'package:fitness_client/common/widgets/custom_image_widget.dart';
+import 'package:fitness_client/common/widgets/text_row_widget.dart';
 import 'package:fitness_client/features/dashboard/widgets/card_drawer_widget.dart';
 import 'package:fitness_client/helper/route_helper.dart';
 import 'package:fitness_client/util/app_colors.dart';
+import 'package:fitness_client/util/app_constants.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -94,53 +97,37 @@ class _MyCardScreenState extends State<MyCardScreen> with TickerProviderStateMix
               ),
 
               SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomButton(
-                    onPressed: () {
-                      Get.toNamed(RouteHelper.package);
-                    },
-                    radius: 8,
-                    height: 48,
-                    isBold: false,
-                    isBorder: true,
-                    buttonText: 'Mua gói tập',
-                    color: Colors.white,
-                    width: context.width * 0.4,
-                    textColor: Colors.grey[900],
-                  ),
-                  CustomButton(
-                    onPressed: () {},
-                    radius: 8,
-                    height: 48,
-                    isBold: false,
-                    isBorder: true,
-                    buttonText: 'Bảo lưu',
-                    color: Colors.white,
-                    width: context.width * 0.4,
-                    textColor: Colors.grey[900],
-                  ),
-                ],
+              CustomButton(
+                onPressed: () {
+                  Get.toNamed(RouteHelper.package);
+                },
+                radius: 8,
+                height: 48,
+                isBold: false,
+                isBorder: true,
+                buttonText: 'Xem các gói tập',
+                color: Colors.white,
+                width: context.width,
+                textColor: Colors.grey[900],
               ),
 
               SizedBox(height: 16),
-              TabBar(
-                controller: _tabController,
-                isScrollable: false,
-                tabs: [
-                  Tab(icon: Icon(Icons.grid_on_rounded)),
-                  Tab(icon: Icon(Icons.contacts)),
-                ],
-                labelColor: Color.fromRGBO(48, 48, 48, 1), // Màu chữ khi được chọn
-                unselectedLabelColor: Color.fromRGBO(128, 128, 128, 1), // Màu chữ khi không được chọn
-                indicatorColor: Color.fromRGBO(48, 48, 48, 1),
-                indicatorWeight: 0.5,
-                indicatorSize: TabBarIndicatorSize.tab,
-                dividerColor: Colors.transparent,
-                tabAlignment: TabAlignment.fill,
-              ),
-              SizedBox(height: 16),
+              // TabBar(
+              //   controller: _tabController,
+              //   isScrollable: false,
+              //   tabs: [
+              //     Tab(icon: Icon(Icons.grid_on_rounded)),
+              //     Tab(icon: Icon(Icons.contacts)),
+              //   ],
+              //   labelColor: Color.fromRGBO(48, 48, 48, 1), // Màu chữ khi được chọn
+              //   unselectedLabelColor: Color.fromRGBO(128, 128, 128, 1), // Màu chữ khi không được chọn
+              //   indicatorColor: Color.fromRGBO(48, 48, 48, 1),
+              //   indicatorWeight: 0.5,
+              //   indicatorSize: TabBarIndicatorSize.tab,
+              //   dividerColor: Colors.transparent,
+              //   tabAlignment: TabAlignment.fill,
+              // ),
+              // SizedBox(height: 16),
               // Tiêu đề lớp học
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -152,14 +139,34 @@ class _MyCardScreenState extends State<MyCardScreen> with TickerProviderStateMix
               ),
               SizedBox(height: 16),
               // Danh sách lớp học
-              // Expanded(
-              //   child: ListView(
-              //     children: [
-              //       ClassCard(title: 'Yoga Basics', time: '16:00'),
-              //       ClassCard(title: 'Gym New', time: '18:00'),
-              //     ],
-              //   ),
-              // ),
+              SizedBox(
+                height: 150,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    ClassCard(title: 'Yoga Basics', time: '16:00'),
+                    ClassCard(title: 'Gym New', time: '18:00'),
+                  ],
+                ),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    borderRadius: BorderRadius.circular(8),
+                    onTap: () {
+                      Get.toNamed(RouteHelper.classToday);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Text('Xem thêm', style: fontRegular.copyWith(color: AppColors.orange300)),
+                    ),
+                  ),
+                ],
+              ),
+
+              SizedBox(height: 16),
             ],
           ),
         ),
@@ -177,9 +184,32 @@ class ClassCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.only(bottom: 16),
-      child: ListTile(title: Text(title), subtitle: Text(time), trailing: Icon(Icons.arrow_forward_ios)),
+    return Container(
+      width: 220,
+      margin: EdgeInsets.only(right: 16),
+      child: Column(
+        spacing: 10,
+        children: [
+          Stack(
+            children: [
+              CustomImageWidget(imageUrl: AppConstants.imgDefault, borderRadius: 8),
+              Positioned(
+                top: 5,
+                right: 5,
+                child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.all(4.0),
+                    decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+                    child: Icon(Icons.remove_red_eye_outlined, size: 18),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          TextRowWidget(textLeft: 'Yoga basic', textRight: '16:00'),
+        ],
+      ),
     );
   }
 }

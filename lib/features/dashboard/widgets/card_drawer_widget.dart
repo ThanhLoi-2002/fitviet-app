@@ -9,8 +9,13 @@ class CardDrawerWidget extends StatelessWidget {
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-          child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            InkWell(onTap: () => {},child: ListTile(leading: Icon(Icons.qr_code), title: Text('QR Code'),)),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              InkWell(
+                onTap: () => {},
+                child: ListTile(leading: Icon(Icons.qr_code), title: Text('QR Code')),
+              ),
 
               InkWell(
                 onTap: () => {},
@@ -20,11 +25,12 @@ class CardDrawerWidget extends StatelessWidget {
                 onTap: () => {},
                 child: ListTile(leading: Icon(Icons.star), title: Text('Đánh giá')),
               ),
-                          InkWell(
+              InkWell(
                 onTap: () => {},
                 child: ListTile(leading: Icon(Icons.help), title: Text('Hỗ trợ từ phòng tập')),
               ),
-          ]),
+            ],
+          ),
         ),
       ),
     );

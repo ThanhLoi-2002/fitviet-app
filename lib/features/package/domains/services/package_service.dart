@@ -1,8 +1,5 @@
-
 import 'package:fitness_client/api/api_client.dart';
-import 'package:fitness_client/common/models/response_list_model.dart';
 import 'package:fitness_client/common/models/response_model.dart';
-import 'package:fitness_client/features/package/domains/models/package.dart';
 import 'package:fitness_client/util/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -11,13 +8,14 @@ class PackageService {
   final SharedPreferences sharedPreferences;
   PackageService({required this.sharedPreferences, required this.apiClient});
 
-  Future<ResponseListModel<List<Package>>?> getAllPackage(String gymId) async {
-    String uri = AppConstants.getAllPackageUri;
+  Future<ResponseModel?> getAllPackage(String gymId, int page) async {
+    String uri = '${AppConstants.getAllPackageUri}/$gymId?page=$page&limit=10';
+    return await apiClient.getData(uri);
+  }
 
-    ResponseModel response = await apiClient.getData(uri);
-    if (response.isSuccess) {
-      // return ResponseListModel<List<Package>>.fromJson(response.toJson(), (json) => );
-    }
-    return null;
+  Future<ResponseModel?> getPackageById(String id) async {
+    String uri = '${AppConstants.getPackageByIdUri}/$id';
+
+    return await apiClient.getData(uri);
   }
 }

@@ -6,6 +6,16 @@ enum PackageTimePeriodType {
 
 extension PackageTimePeriodTypeExtension on PackageTimePeriodType {
   String get value => toString().split('.').last;
+  String get valueInVietnamese {
+    switch (this) {
+      case PackageTimePeriodType.session:
+        return 'buổi';
+      case PackageTimePeriodType.month:
+        return 'tháng';
+      case PackageTimePeriodType.year:
+        return 'năm';
+      }
+  }
 }
 
 enum PackageStatus {

@@ -84,7 +84,7 @@ class Gym {
       segment: json['segment'] != null ? GymSegment.values.firstWhere((e) => e.value == json['segment']) : null,
       openingTime: json['openingTime'] != null ? OpeningTime.fromJson(json['openingTime']) : null,
       images: List<String>.from(json['images'] ?? []),
-      location: List<double>.from(json['location'] ?? []),
+      location: List<double>.from(json['location'] ?? [0.0,0.0]),
       long: json['long']?.toDouble() ?? 0,
       lat: json['lat']?.toDouble() ?? 0,
       isLiked: json['isLiked'] ?? false,

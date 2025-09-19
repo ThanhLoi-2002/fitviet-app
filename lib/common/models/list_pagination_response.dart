@@ -1,3 +1,4 @@
+// chỉ dùng khi lấy danh sách gym
 class ListPaginationResponse<T> {
   List<T>? data;
   int? total;

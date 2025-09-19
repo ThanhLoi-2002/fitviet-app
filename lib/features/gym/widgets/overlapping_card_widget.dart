@@ -1,4 +1,3 @@
-import 'package:fitness_client/common/widgets/custom_dropdown_button.dart';
 import 'package:fitness_client/common/widgets/divider_widget.dart';
 import 'package:fitness_client/common/widgets/text_load_more_widget.dart';
 import 'package:fitness_client/features/gym/domains/models/gym.dart';

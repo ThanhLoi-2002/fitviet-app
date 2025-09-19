@@ -1,8 +1,10 @@
 import 'package:fitness_client/common/widgets/no_internet_screen.dart';
 import 'package:fitness_client/features/auth/screens/sign_in_screen.dart';
 import 'package:fitness_client/features/auth/screens/sign_up_screen.dart';
+import 'package:fitness_client/features/class/screens/class_today_screen.dart';
 import 'package:fitness_client/features/dashboard/screens/dashboard_screen.dart';
 import 'package:fitness_client/features/gym/screens/gym_detail_screen.dart';
+import 'package:fitness_client/features/package/screens/package_detail_screen.dart';
 import 'package:fitness_client/features/package/screens/package_screen.dart';
 import 'package:fitness_client/features/payment/screens/payment_success_screen.dart';
 import 'package:fitness_client/features/profile/screens/change_password_screen.dart';
@@ -25,13 +27,16 @@ class RouteHelper {
   static const String gymDetail = '/gym-detail';
   static const String rating = '/rating';
   static const String package = '/package';
+  static const String packageDetail = '/package-detail';
   static const String payment = '/payment';
   static const String paymentSuccess = '/payment-success';
   static const String updateProfile = '/update-profile';
   static const String changePassword = '/change-password';
+    static const String classToday = '/class-today';
 
   static String getGymDetailRoute(String gymId) => '$gymDetail?id=$gymId';
   static String getRatingRoute(String gymId) => '$rating?gymId=$gymId';
+  static String getPackageDetailRoute(String packageId) => '$packageDetail?packageId=$packageId';
   static String getChangePasswordRoute(bool fromPasswordChange, String? email) => '$changePassword?email=$email&fromPasswordChange=$fromPasswordChange';
 
   static List<GetPage> routes = [
@@ -45,6 +50,7 @@ class RouteHelper {
     GetPage(name: payment, page: () => getRoute(PaymentScreen())),
     GetPage(name: paymentSuccess, page: () => getRoute(PaymentSuccessScreen())),
     GetPage(name: updateProfile, page: () => getRoute(UpdateProfileScreen())),
+    GetPage(name: classToday, page: () => getRoute(ClassTodayScreen())),
     GetPage(
       name: changePassword,
       page: () => getRoute(ChangePasswordScreen(fromPasswordChange: Get.parameters['fromPasswordChange'] == 'true', email: Get.parameters['email'])),
@@ -56,6 +62,10 @@ class RouteHelper {
     GetPage(
       name: rating,
       page: () => getRoute(RatingScreen(gymId: Get.parameters['gymId']!)),
+    ),
+    GetPage(
+      name: packageDetail,
+      page: () => getRoute(PackageDetailScreen(id: Get.parameters['packageId']!)),
     ),
   ];
 

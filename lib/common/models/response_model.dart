@@ -21,7 +21,7 @@ class ResponseModel<T> {
       isSuccess: (json['statusCode'] >= 200 && json['statusCode'] <= 300) ? true : false,
       statusCode: json['statusCode'] ?? 0,
       message: message,
-      data: json['data'],
+      data: json['data'] as T,
       metadata: json['metadata'] != null ? PaginationResponse.fromJson(json['metadata']) : null,
     );
   }

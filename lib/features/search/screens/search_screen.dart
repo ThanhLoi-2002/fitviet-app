@@ -43,6 +43,14 @@ class _SearchScreenState extends State<SearchScreen> {
       Get.find<ConvenienceController>().getAllConvenience(ConvenienceType.favorite.value);
     }
 
+    if (Get.find<ConvenienceController>().highClassConveniences.isEmpty) {
+      Get.find<ConvenienceController>().getAllConvenience(ConvenienceType.highClass.value);
+    }
+
+    if (Get.find<ConvenienceController>().safeConveniences.isEmpty) {
+      Get.find<ConvenienceController>().getAllConvenience(ConvenienceType.safe.value);
+    }
+
     if (Get.find<SubjectController>().subjects.isEmpty) {
       Get.find<SubjectController>().getAllsubject();
     }

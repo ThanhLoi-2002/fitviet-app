@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
 class CustomImageWidget extends StatelessWidget {
@@ -19,7 +20,7 @@ class CustomImageWidget extends StatelessWidget {
           duration: const Duration(seconds: 2),
           child: Container(
             height: height ?? 100,
-            width: width ?? double.infinity,
+            width: width ?? context.width,
             decoration: BoxDecoration(color: Colors.grey[200]),
           ),
         ),
@@ -27,7 +28,7 @@ class CustomImageWidget extends StatelessWidget {
         errorWidget: (context, url, error) => Icon(Icons.error),
         fit: fit ?? BoxFit.cover,
         height: height ?? 100,
-        width: width ?? double.infinity,
+        width: width ?? context.width,
       ),
     );
   }

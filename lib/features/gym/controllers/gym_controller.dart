@@ -1,7 +1,6 @@
 import 'package:fitness_client/common/models/list_pagination_response.dart';
 import 'package:fitness_client/common/models/response_model.dart';
 import 'package:fitness_client/features/address/controllers/address_controller.dart';
-import 'package:fitness_client/features/address/domains/services/address_service.dart';
 import 'package:fitness_client/features/gym/domains/models/gym.dart';
 import 'package:fitness_client/features/gym/domains/models/gym_filter.dart';
 import 'package:fitness_client/features/gym/domains/services/gym_service.dart';

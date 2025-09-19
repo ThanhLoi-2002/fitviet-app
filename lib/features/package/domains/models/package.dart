@@ -1,3 +1,4 @@
+import 'package:fitness_client/features/convenience/domains/models/convenience.dart';
 import 'package:fitness_client/features/package/domains/enums/packag_enum.dart';
 
 class Package {
@@ -12,7 +13,7 @@ class Package {
   List<String>? images;
   double? promotionalPrice;
   PackageType? type;
-  List<String>? conveniences;
+  List<Convenience>? conveniences;
   String? gym;
 
   Package({
@@ -34,17 +35,17 @@ class Package {
   factory Package.fromJson(Map<String, dynamic> json) {
     return Package(
       id: json['_id'],
-      name: json['name'],
-      description: json['description'],
-      price: json['price']?.toDouble(),
+      name: json['name'] ?? "",
+      description: json['description'] ?? "",
+      price: json['price']?.toDouble() ?? 0,
       timePeriodType: json['timePeriodType'] != null ? PackageTimePeriodType.values.firstWhere((e) => e.value == json['timePeriodType']) : null,
-      totalSessions: json['totalSessions']?.toDouble(),
-      duration: json['duration'],
+      totalSessions: json['totalSessions']?.toDouble() ?? 0,
+      duration: json['duration'] ?? 0,
       status: json['status'] != null ? PackageStatus.values.firstWhere((e) => e.value == json['status']) : null,
-      images: List<String>.from(json['images']),
-      promotionalPrice: json['promotionalPrice'],
+      images: List<String>.from(json['images'] ?? []) ,
+      promotionalPrice: json['promotionalPrice']?.toDouble() ?? 0,
       type: json['type'] != null ? PackageType.values.firstWhere((e) => e.value == json['type']) : null,
-      conveniences: List<String>.from(json['conveniences']),
+      conveniences: (json['conveniences'] != null && json['conveniences'] is Map<String, dynamic>) ? List<Convenience>.from(json['conveniences'].map((x) => Convenience.fromJson(x))) : [],
       gym: json['gym'],
     );
   }

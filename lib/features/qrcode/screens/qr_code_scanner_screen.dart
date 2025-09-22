@@ -35,53 +35,67 @@ class _QrCodeScannerScreenState extends State<QrCodeScannerScreen> {
                 children: [
                   Text('Vui lòng quét QR code để checkin'),
                   Expanded(
-                    child: MobileScanner(
-                      controller: MobileScannerController(detectionSpeed: DetectionSpeed.noDuplicates, returnImage: true),
-                      onDetect: (capture) {
-                        final List<Barcode> barcodes = capture.barcodes;
-                        final Uint8List? image = capture.image;
-                        if (barcodes.isNotEmpty) {
-                          // Xử lý mã vạch đầu tiên
-                          final barcode = barcodes.first;
-                    
-                          if (image != null) {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: Text(barcode.rawValue ?? "Không xác định"),
-                                  content: Image(image: MemoryImage(image)),
-                                  actions: [
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        CustomButton(
-                                          buttonText: 'Đóng',
-                                          color: Colors.red,
-                                          isBold: false,
-                                          width: context.width * 0.3,
-                                          onPressed: () {
-                                            Get.back();
-                                          },
-                                        ),
-                    
-                                        // if ((barcode.rawValue ?? "").contains('-'))
-                                          CustomButton(buttonText: 'Ckeck in', isLoading: packageController.isLoading ,color: AppColors.orange300, width: context.width * 0.3, isBold: false, onPressed: () async {
-                                            ResponseModel? response = await packageController.checkIn(client!.userCode!);
-                                            if( response.isSuccess){
-                                              showCustomSnackBar(response.message, isError: false);
-                                              Get.back();
-                                            }
-                                          }),
-                                      ],
+                    child: Padding(
+                      padding: EdgeInsets.all(12),
+                      child: MobileScanner(
+                        controller: MobileScannerController(detectionSpeed: DetectionSpeed.noDuplicates, returnImage: true),
+                        onDetect: (capture) {
+                          final List<Barcode> barcodes = capture.barcodes;
+                          final Uint8List? image = capture.image;
+                          if (barcodes.isNotEmpty) {
+                            // Xử lý mã vạch đầu tiên
+                            final barcode = barcodes.first;
+
+                            if (image != null) {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0), // Adjust the radius here
                                     ),
-                                  ],
-                                );
-                              },
-                            );
+                                    title: Text(barcode.rawValue ?? "Không xác định"),
+                                    content: Image(image: MemoryImage(image)),
+                                    actions: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomButton(
+                                            buttonText: 'Đóng',
+                                            color: Colors.red,
+                                            isBold: false,
+                                            width: context.width * 0.3,
+                                            radius: 8,
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                          ),
+
+                                          CustomButton(
+                                            buttonText: 'Ckeck in',
+                                            isLoading: packageController.isLoading,
+                                            color: AppColors.orange300,
+                                            width: context.width * 0.3,
+                                            isBold: false,
+                                            radius: 8,
+                                            onPressed: () async {
+                                              ResponseModel? response = await packageController.checkIn(client!.userCode!);
+                                              if (response.isSuccess) {
+                                                showCustomSnackBar(response.message, isError: false);
+                                                Get.back();
+                                              }
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            }
                           }
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
                 ],

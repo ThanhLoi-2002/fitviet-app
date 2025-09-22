@@ -60,7 +60,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
               SizedBox(height: 10),
               DividerWidget(),
               SizedBox(height: 10),
-              PackageItemWidget(isSelected: false, onTap: () {}, package: Package(),),
+              PackageItemWidget(onTap: () {}, package: Package(),),
               SizedBox(height: 10),
               DividerWidget(),
               SizedBox(height: 10),

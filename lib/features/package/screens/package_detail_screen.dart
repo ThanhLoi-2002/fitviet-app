@@ -48,16 +48,16 @@ class _PackageDetailScreenState extends State<PackageDetailScreen> {
               appBar: AppBar(
                 title: Text('Các gói tập', style: fontMedium.copyWith(fontSize: 20)),
                 centerTitle: true,
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 16),
-                    child: InkWell(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      onTap: () {},
-                      child: Padding(padding: const EdgeInsets.all(4.0), child: Icon(Icons.more_vert)),
-                    ),
-                  ),
-                ],
+                // actions: [
+                //   Padding(
+                //     padding: const EdgeInsets.only(right: 16),
+                //     child: InkWell(
+                //       borderRadius: BorderRadius.all(Radius.circular(20)),
+                //       onTap: () {},
+                //       child: Padding(padding: const EdgeInsets.all(4.0), child: Icon(Icons.more_vert)),
+                //     ),
+                //   ),
+                // ],
               ),
               body: Container(
                 height: context.height,

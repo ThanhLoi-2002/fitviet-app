@@ -58,8 +58,8 @@ class _SettingScreenState extends State<SettingScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('Hello'),
                                 Text(profileController.client?.name ?? "Your name", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                                Text('Mã user: ${profileController.client!.userCode}'),
                               ],
                             ),
                           ),
@@ -90,12 +90,12 @@ class _SettingScreenState extends State<SettingScreen> {
                                 Get.toNamed(RouteHelper.getChangePasswordRoute(true, profileController.client!.email!));
                               },
                             ),
-                            CustomListTileWidget(title: 'Thanh toán và chi trả', icon: Icons.credit_card, onTap: () {}),
-                            CustomListTileWidget(title: 'Giới thiệu bạn bè', icon: Icons.people, onTap: () {}),
-                            CustomListTileWidget(title: 'Trở thành đối tác của FitNet', icon: Icons.fitness_center, onTap: () {}),
-                            CustomListTileWidget(title: 'Cách hoạt động của FitNet', icon: Icons.fitness_center, onTap: () {}),
-                            CustomListTileWidget(title: 'Trợ giúp', icon: Icons.help, onTap: () {}),
-                            CustomListTileWidget(title: 'Gửi phản hồi', icon: Icons.help, onTap: () {}),
+                            // CustomListTileWidget(title: 'Thanh toán và chi trả', icon: Icons.credit_card, onTap: () {}),
+                            // CustomListTileWidget(title: 'Giới thiệu bạn bè', icon: Icons.people, onTap: () {}),
+                            // CustomListTileWidget(title: 'Trở thành đối tác của FitNet', icon: Icons.fitness_center, onTap: () {}),
+                            // CustomListTileWidget(title: 'Cách hoạt động của FitNet', icon: Icons.fitness_center, onTap: () {}),
+                            // CustomListTileWidget(title: 'Trợ giúp', icon: Icons.help, onTap: () {}),
+                            // CustomListTileWidget(title: 'Gửi phản hồi', icon: Icons.help, onTap: () {}),
                             CustomListTileWidget(
                               title: 'Đăng xuất',
                               icon: Icons.logout,

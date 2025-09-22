@@ -1,4 +1,5 @@
 import 'package:fitness_client/common/models/response_model.dart';
+import 'package:fitness_client/features/package/domains/models/client_package.dart';
 import 'package:fitness_client/features/package/domains/models/package.dart';
 import 'package:fitness_client/features/package/domains/services/package_service.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,9 @@ class PackageController extends GetxController implements GetxService {
   Package? _package;
   Package? get package => _package;
 
+  ClientPackage? _clientPackage;
+  ClientPackage? get clientPackage => _clientPackage;
+
   bool _isOutOfItem = false;
   bool get isOutOfItem => _isOutOfItem;
 
@@ -26,8 +30,8 @@ class PackageController extends GetxController implements GetxService {
     _isLoading = true;
     page += 1;
 
-    ResponseModel? response = await packageService.getAllPackage(gymId, page);
-    if (response != null && response.isSuccess) {
+    ResponseModel response = await packageService.getAllPackage(gymId, page);
+    if (response.isSuccess) {
       List<Package> list = List<Package>.from(response.data!.map((x) => Package.fromJson(x))).toList();
       _packages.addAll(list);
 
@@ -43,9 +47,33 @@ class PackageController extends GetxController implements GetxService {
   Future<void> getPackageById(String id) async {
     _isLoading = true;
 
-    ResponseModel? response = await packageService.getPackageById(id);
-    if (response != null && response.isSuccess) {
+    ResponseModel response = await packageService.getPackageById(id);
+    if (response.isSuccess) {
       _package = Package.fromJson(response.data!);
+    }
+
+    _isLoading = false;
+    update();
+  }
+
+  Future<ResponseModel> checkIn(String userCode) async {
+    _isLoading = true;
+
+    ResponseModel response = await packageService.checkIn(userCode);
+
+    _isLoading = false;
+    update();
+    return response;
+  }
+
+  Future<void> getClientPackage() async {
+    _isLoading = true;
+
+    ResponseModel response = await packageService.getClientPackage();
+    if (response.isSuccess && response.data != null) {
+      _clientPackage = ClientPackage.fromJson(response.data!);
+    } else {
+      _clientPackage = null;
     }
 
     _isLoading = false;

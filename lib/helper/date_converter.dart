@@ -4,7 +4,9 @@ import 'package:intl/intl.dart';
 
 class DateConverter {
   static String formatOnlyDate(DateTime dateTime) {
-    return DateFormat('dd-MM-yyyy').format(dateTime);
+    // Add 7 hours to the provided DateTime
+    DateTime adjustedDateTime = dateTime.add(Duration(hours: 7));
+    return DateFormat('dd-MM-yyyy').format(adjustedDateTime);
   }
 
   static String formatDate(DateTime dateTime) {

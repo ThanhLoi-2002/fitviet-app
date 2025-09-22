@@ -1,16 +1,14 @@
 import 'package:fitness_client/common/widgets/custom_image_widget.dart';
 import 'package:fitness_client/features/package/domains/models/package.dart';
 import 'package:fitness_client/features/package/widgets/price_widget.dart';
-import 'package:fitness_client/util/app_colors.dart';
 import 'package:fitness_client/util/styles.dart';
 import 'package:flutter/material.dart';
 
 class PackageItemWidget extends StatelessWidget {
-  final bool isSelected;
   final VoidCallback onTap;
   final Package package;
 
-  const PackageItemWidget({super.key, required this.isSelected, required this.onTap, required this.package});
+  const PackageItemWidget({super.key, required this.onTap, required this.package});
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +23,8 @@ class PackageItemWidget extends StatelessWidget {
               child: Container(
                 height: 100,
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.orange300.withOpacity(0.05) : Colors.grey[100],
-                  border: Border.all(color: isSelected ? AppColors.orange300.withOpacity(0.4) : Colors.grey[300]!),
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey[300]!),
                   borderRadius: BorderRadius.only(topRight: Radius.circular(8), bottomRight: Radius.circular(8)),
                 ),
                 child: Row(

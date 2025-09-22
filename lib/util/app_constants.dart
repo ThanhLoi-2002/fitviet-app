@@ -25,6 +25,8 @@ class AppConstants {
   static const String updateProfileUri = '/api/client/updateMyProfile';
   static const String resetPasswordUri = '/api/client/reset-password';
   static const String forgotPasswordUri = '/api/client/forgot-password';
+  static const String checkInUri = '/api/checkin';
+  static const String getClientPackageUri = '/api/client-packages/client';
 
   /// Shared Key
   static const String token = 'token';

@@ -9,6 +9,7 @@ import 'package:fitness_client/features/package/screens/package_screen.dart';
 import 'package:fitness_client/features/payment/screens/payment_success_screen.dart';
 import 'package:fitness_client/features/profile/screens/change_password_screen.dart';
 import 'package:fitness_client/features/profile/screens/update_profile_screen.dart';
+import 'package:fitness_client/features/qrcode/screens/qr_code_scanner_screen.dart';
 import 'package:fitness_client/features/rating/screens/rating_screen.dart';
 import 'package:fitness_client/features/search/screens/search_screen.dart';
 import 'package:fitness_client/features/splash/screens/splash_screen.dart';
@@ -32,7 +33,8 @@ class RouteHelper {
   static const String paymentSuccess = '/payment-success';
   static const String updateProfile = '/update-profile';
   static const String changePassword = '/change-password';
-    static const String classToday = '/class-today';
+  static const String classToday = '/class-today';
+  static const String qrCodeScanner = '/qr-code-scanner';
 
   static String getGymDetailRoute(String gymId) => '$gymDetail?id=$gymId';
   static String getRatingRoute(String gymId) => '$rating?gymId=$gymId';
@@ -51,6 +53,7 @@ class RouteHelper {
     GetPage(name: paymentSuccess, page: () => getRoute(PaymentSuccessScreen())),
     GetPage(name: updateProfile, page: () => getRoute(UpdateProfileScreen())),
     GetPage(name: classToday, page: () => getRoute(ClassTodayScreen())),
+    GetPage(name: qrCodeScanner, page: () => getRoute(QrCodeScannerScreen())),
     GetPage(
       name: changePassword,
       page: () => getRoute(ChangePasswordScreen(fromPasswordChange: Get.parameters['fromPasswordChange'] == 'true', email: Get.parameters['email'])),

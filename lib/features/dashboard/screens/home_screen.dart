@@ -93,7 +93,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                         ),
                       ),
 
-                      Icon(Icons.qr_code, size: 30),
+                      InkWell(
+                        onTap: () {
+                          Get.toNamed(RouteHelper.qrCodeScanner);
+                        },
+                        child: Icon(Icons.qr_code, size: 30),
+                      ),
                     ],
                   ),
 
@@ -118,12 +123,12 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                           tabAlignment: TabAlignment.start,
                         ),
                       ),
-                      IconButton(
-                        icon: Icon(Icons.menu),
-                        onPressed: () {
-                          // Xử lý sự kiện khi nhấn nút icon
-                        },
-                      ),
+                      // IconButton(
+                      //   icon: Icon(Icons.menu),
+                      //   onPressed: () {
+                      //     // Xử lý sự kiện khi nhấn nút icon
+                      //   },
+                      // ),
                     ],
                   ),
 

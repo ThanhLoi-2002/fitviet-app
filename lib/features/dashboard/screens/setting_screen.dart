@@ -59,7 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(profileController.client?.name ?? "Your name", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                                Text('Mã user: ${profileController.client!.userCode}'),
+                                Text('Mã user: ${profileController.client?.userCode ?? ""}'),
                               ],
                             ),
                           ),

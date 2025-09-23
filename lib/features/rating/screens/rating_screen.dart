@@ -23,16 +23,18 @@ class _RatingScreenState extends State<RatingScreen> {
   @override
   void initState() {
     super.initState();
-    // Gọi phương thức để lấy tất cả đánh giá
-    Get.find<RatingController>().reset();
-    Get.find<RatingController>().getAll(gymId: widget.gymId, limit: 10);
-    Get.find<RatingController>().getRatingDetailByGymId(gymId: widget.gymId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Gọi phương thức để lấy tất cả đánh giá
+      Get.find<RatingController>().reset();
+      Get.find<RatingController>().getAll(gymId: widget.gymId, limit: 10);
+      Get.find<RatingController>().getRatingDetailByGymId(gymId: widget.gymId);
 
-    // Lắng nghe sự kiện cuộn để tải thêm đánh giá
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent) {
-        Get.find<RatingController>().getAll(gymId: widget.gymId, limit: 10);
-      }
+      // Lắng nghe sự kiện cuộn để tải thêm đánh giá
+      _scrollController.addListener(() {
+        if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent) {
+          Get.find<RatingController>().getAll(gymId: widget.gymId, limit: 10);
+        }
+      });
     });
   }
 
@@ -103,7 +105,7 @@ class _RatingScreenState extends State<RatingScreen> {
                         onPressed: () {
                           ratingDialog(gymController, ratingController);
                         },
-                        buttonText: isRated ? 'Cập nhật đánh giá':'Viết đánh giá',
+                        buttonText: isRated ? 'Cập nhật đánh giá' : 'Viết đánh giá',
                       ),
                       SizedBox(height: 16),
                       // Thay thế Expanded bằng Container để đặt chiều cao cụ thể

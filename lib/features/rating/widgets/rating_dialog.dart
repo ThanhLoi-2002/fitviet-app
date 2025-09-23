@@ -133,10 +133,11 @@ class _RatingDialogState extends State<RatingDialog> {
                                 Get.back();
                               }
                             }
+                            widget.ratingController.getRatingDetailByGymId(gymId: widget.gymController.gym!.id!);
                           }
                         : null,
                     isLoading: widget.ratingController.isLoading,
-                    buttonText: isRated ? 'Cập nhật bài viết' : 'Đăng bài viết',
+                    buttonText: isRated ? 'Cập nhật đánh giá' : 'Đăng đánh giá',
                     color: AppColors.orange300,
                     textColor: Colors.white,
                   ),

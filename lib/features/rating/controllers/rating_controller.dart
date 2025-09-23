@@ -52,8 +52,10 @@ class RatingController extends GetxController implements GetxService {
 
   Future<void> getRatingDetailByGymId({required String gymId}) async {
     ResponseModel<Rating>? result = await ratingService.getRatingDetailByGymId(gymId: gymId);
-    if (result != null && result.isSuccess) {
+    if (result != null && result.isSuccess && result.data != null) {
       _rating = result.data;
+    } else {
+      _rating = null;
     }
     update();
   }
@@ -88,5 +90,7 @@ class RatingController extends GetxController implements GetxService {
     _ratings = [];
     page = 0;
     _isOutOfItem = false;
+    _rating = null;
+    update();
   }
 }

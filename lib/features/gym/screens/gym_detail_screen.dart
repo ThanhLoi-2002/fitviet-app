@@ -5,6 +5,7 @@ import 'package:fitness_client/features/gym/controllers/gym_controller.dart';
 import 'package:fitness_client/features/gym/widgets/conveniences_widget.dart';
 import 'package:fitness_client/features/gym/widgets/gym_app_bar_widget.dart';
 import 'package:fitness_client/features/gym/widgets/overlapping_card_widget.dart';
+import 'package:fitness_client/features/rating/controllers/rating_controller.dart';
 import 'package:fitness_client/features/rating/widgets/map_and_rating_widget.dart';
 import 'package:fitness_client/util/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<GymController>().getGymById(widget.gymId);
+    Get.find<GymController>().getGymById(widget.gymId).then((response) => {Get.find<RatingController>().reset(), Get.find<RatingController>().getAll(gymId: widget.gymId, limit: 5)});
   }
 
   @override
@@ -52,9 +53,9 @@ class _GymDetailScreenState extends State<GymDetailScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             OverlappingCardWidget(gym: gymController.gym!),
-                        
+
                             ConveniencesWidget(gym: gymController.gym!),
-                        
+
                             // CustomerServiceDepartmentWidget(),
                             MapAndRatingWidget(gym: gymController.gym!),
                             DividerWidget(),

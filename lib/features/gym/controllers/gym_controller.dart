@@ -19,7 +19,18 @@ class GymController extends GetxController implements GetxService {
   Gym? _gym;
   Gym? get gym => _gym;
 
-  GymFilter _gymFilter = GymFilter(basicConvenience: [], highClassConvenience: [], subjects: [], rating: 1, toDistance: 100, fromDistance: 0, fromPrice: 0, toPrice: 0, favoriteConvenience: [], safeConvenience: []);
+  GymFilter _gymFilter = GymFilter(
+    basicConvenience: [],
+    highClassConvenience: [],
+    subjects: [],
+    rating: 0,
+    toDistance: 100,
+    fromDistance: 0,
+    fromPrice: 0,
+    toPrice: 0,
+    favoriteConvenience: [],
+    safeConvenience: [],
+  );
   GymFilter get gymFilter => _gymFilter;
 
   bool _isOutOfItem = false;
@@ -51,6 +62,11 @@ class GymController extends GetxController implements GetxService {
 
   Future<void> getGymById(String id) async {
     _gym = await gymService.getGymById(id);
+    update();
+  }
+
+  void resetGymNull() {
+    _gym = null;
     update();
   }
 
@@ -127,7 +143,15 @@ class GymController extends GetxController implements GetxService {
   void resetFilter({bool isResetAll = true}) {
     _gyms = [];
     if (isResetAll) {
-      _gymFilter = GymFilter(basicConvenience: [], highClassConvenience: [], subjects: [], rating: 1, toDistance: 100, fromDistance: 0, fromPrice: 0, toPrice: 0,
+      _gymFilter = GymFilter(
+        basicConvenience: [],
+        highClassConvenience: [],
+        subjects: [],
+        rating: 0,
+        toDistance: 100,
+        fromDistance: 0,
+        fromPrice: 0,
+        toPrice: 0,
         favoriteConvenience: [],
         safeConvenience: [],
       );
@@ -141,7 +165,15 @@ class GymController extends GetxController implements GetxService {
 
   // dùng cho nút reset
   void initFilter() {
-    _gymFilter = GymFilter(basicConvenience: [], highClassConvenience: [], subjects: [], rating: 1, toDistance: 100, fromDistance: 0, fromPrice: 0, toPrice: 0,
+    _gymFilter = GymFilter(
+      basicConvenience: [],
+      highClassConvenience: [],
+      subjects: [],
+      rating: 0,
+      toDistance: 100,
+      fromDistance: 0,
+      fromPrice: 0,
+      toPrice: 0,
       favoriteConvenience: [],
       safeConvenience: [],
     );

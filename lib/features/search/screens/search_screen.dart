@@ -139,7 +139,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Column(
                       children: [
                         gymController.gyms == null ? GymsShimmer() : SizedBox(),
-                        gymController.gyms != null && gymController.gyms!.isEmpty ? Center(child: Text('Không có phòng gym nào')) : SizedBox(),
+                        gymController.gyms != null && gymController.gyms!.isEmpty && gymController.isLoading ? Center(child: CircularProgressIndicator()) : SizedBox(),
+                        gymController.gyms != null && gymController.gyms!.isEmpty && !gymController.isLoading ? Center(child: Text('Không có phòng gym nào')) : SizedBox(),
                         gymController.gyms != null && gymController.gyms!.isNotEmpty
                             ? GridView.builder(
                                 physics: NeverScrollableScrollPhysics(), // Disable scrolling
@@ -156,6 +157,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   if (index < gymController.gyms!.length) {
                                     return GestureDetector(
                                       onTap: () {
+                                        Get.find<GymController>().resetGymNull();
                                         Get.toNamed(RouteHelper.getGymDetailRoute(gymController.gyms![index].id!));
                                       },
                                       child: GymCardWidget(gym: gymController.gyms![index]),

@@ -22,7 +22,6 @@ class _MapAndRatingWidgetState extends State<MapAndRatingWidget> {
   @override
   void initState() {
     super.initState();
-    Get.find<RatingController>().getAll(gymId: widget.gym.id!, limit: 5);
   }
 
   @override
